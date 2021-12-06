@@ -21,6 +21,7 @@ export default class App extends React.Component {
   renderPage() {
     const { route } = this.state;
     console.log(route);
+    console.log('main branch established');
     return (<div>{`we are currently on ${route.path}`}</div>);
   }
 
