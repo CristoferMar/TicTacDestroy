@@ -1,0 +1,8 @@
+.full-height {
+  height: 100vh;
+}
+
+.blue-radial {
+  background: rgb(0, 20, 108);
+  background: radial-gradient(circle, rgba(0, 20, 108, 1) 48%, rgba(0, 2, 9, 1) 97%);
+}
