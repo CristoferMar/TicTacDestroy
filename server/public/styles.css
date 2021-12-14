@@ -6,3 +6,13 @@
   background: rgb(0, 20, 108);
   background: radial-gradient(circle, rgba(0, 20, 108, 1) 48%, rgba(0, 2, 9, 1) 97%);
 }
+
+.full-width {
+  width: 100%;
+}
+
+.height {
+  min-height: 30px;
+  height: 8vh;
+  background-color: blue;
+}

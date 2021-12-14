@@ -1,5 +1,6 @@
 import React from 'react';
 import parseRoute from './lib/parse-route';
+import NavBar from './pages/nav-bar';
 // import Home from './pages/home';
 
 export default class App extends React.Component {
@@ -25,10 +26,11 @@ export default class App extends React.Component {
   }
 
   render() {
-    const background = this.state.route === 'Game-Page' ? 'shootingStarBackground' : 'blue-radial';
+    const { path } = this.state.route;
+    const background = path === 'Game-Page' ? 'shootingStarBackground' : 'blue-radial';
     return (
       <div className={`full-height ${background}`}>
-
+        <NavBar path={path} />
       </div>
     );
   }
