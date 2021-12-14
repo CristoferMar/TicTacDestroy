@@ -1,0 +1,48 @@
+/* to change the size of the nav buttons,
+we need to match the width and height on lines 6/7 & 23/24 */
+
+.nav-buttons {
+  position: relative;
+  display: inline-flex;
+  width: 120px;
+  height: 30px;
+  perspective: 1000px;
+}
+
+.nav-buttons-link {
+  font-size: 19px;
+  letter-spacing: 1px;
+  transform-style: preserve-3d;
+  transform: translateZ(-25px);
+  transition: transform 0.25s;
+}
+
+.nav-buttons-link::before,
+.nav-buttons-link::after {
+  position: absolute;
+  content: "Sign out";
+  width: 120px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 5px solid black;
+  box-sizing: border-box;
+  border-radius: 5px;
+}
+
+/* translateZ also need to match on lines 40 & 45 */
+.nav-buttons-link::before {
+  color: #fff;
+  background: #000;
+  transform: rotateY(0deg) translateZ(15px);
+}
+
+.nav-buttons-link::after {
+  color: #000;
+  transform: rotateX(90deg) translateZ(15px);
+}
+
+.nav-buttons-link:hover {
+  transform: translateZ(-25px) rotateX(-90deg);
+}

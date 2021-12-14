@@ -2,6 +2,10 @@
   height: 100vh;
 }
 
+.align-center {
+  align-items: center;
+}
+
 .blue-radial {
   background: rgb(0, 20, 108);
   background: radial-gradient(circle, rgba(0, 20, 108, 1) 48%, rgba(0, 2, 9, 1) 97%);
@@ -28,4 +32,8 @@
 
 .margin-left {
   margin-left: 1rem;
+}
+
+.height-90 {
+  height: 90%;
 }
