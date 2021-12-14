@@ -26,6 +26,7 @@ export default class App extends React.Component {
   }
 
   render() {
+    console.log('this.state.route:', this.state.route);
     const { path } = this.state.route;
     const background = path === 'Game-Page' ? 'shootingStarBackground' : 'blue-radial';
     return (

@@ -11,8 +11,21 @@
   width: 100%;
 }
 
-.height {
-  min-height: 30px;
-  height: 8vh;
-  background-color: blue;
+.height7-min40 {
+  min-height: 40px;
+  height: 7vh;
+  background-color: green;
+}
+
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+}
+
+.padding-5 {
+  padding: 0.5rem;
+}
+
+.margin-left {
+  margin-left: 1rem;
 }
