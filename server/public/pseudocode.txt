@@ -1,6 +1,7 @@
 if player 1 were to click on top left, and top left is not occupied with X or O
 then put an X
-
+We'll use a game counter to see who goes first after the first round.
+player 1 and player 2 can randomly be assigned in the database
 
 import React from 'react';
 import parseRoute from './lib/parse-route';
@@ -15,6 +16,7 @@ export default class App extends React.Component {
         {b1: 0, b2: 0, b3: 0},
         {c1: 0, c2: 0, c3: 0}
       ],
+      currentTurn: ,
       winner: null,
       isAuthorizing: window.localStorage.getItem('tic-tac-destroy') === null,
       route: parseRoute(window.location.hash)
