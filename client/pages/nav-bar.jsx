@@ -11,15 +11,14 @@ export default class NavBar extends React.Component {
   render() {
     const single = ['Lobby', 'Results'].includes(this.props.path);
     return (
-      <div className="full-width height7-min40 flex-between padding-5">
+      <div className="full-width height7-min40 flex-between padding-5 align-center">
 
         {
         single &&
           <>
-            <img src="/images/small-logo.svg" alt="TicTacDestroy" />
+            <img src="/images/small-logo.svg" alt="TicTacDestroy" className="height-90" />
             <div className="flex-between">
-              <button>fart</button>
-              <button className="margin-left">Sign Out</button>
+              <span className="nav-buttons"><a href="#" className="nav-buttons-link"></a></span>
             </div>
           </>
         }
