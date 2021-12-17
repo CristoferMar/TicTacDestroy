@@ -1,6 +1,7 @@
 import React from 'react';
 import parseRoute from './lib/parse-route';
 import NavBar from './pages/nav-bar';
+import Lobby from './pages/lobby';
 // import Home from './pages/home';
 
 export default class App extends React.Component {
@@ -32,6 +33,7 @@ export default class App extends React.Component {
     return (
       <div className={`full-height ${background}`}>
         <NavBar path={path} />
+        <Lobby />
       </div>
     );
   }
