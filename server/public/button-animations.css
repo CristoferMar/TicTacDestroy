@@ -20,7 +20,7 @@ we need to match the width and height on lines 6/7 & 23/24 */
 .nav-buttons-link::before,
 .nav-buttons-link::after {
   position: absolute;
-  content: "Sign Out";
+  /* content: "Sign Out"; */
   width: 120px;
   height: 35px;
   display: flex;
@@ -29,6 +29,27 @@ we need to match the width and height on lines 6/7 & 23/24 */
   border: 3px solid #cd1ccc;
   box-sizing: border-box;
   border-radius: 5px;
+}
+
+.sign-out-content::before,
+.sign-out-content::after {
+  content: "Sign Out";
+}
+
+.sign-in-content::before,
+.sign-in-content::after {
+  content: "Sign In";
+}
+
+.play-as-guest::before,
+.play-as-guest::after {
+  content: "Play as Guest";
+  width: 200px;
+}
+
+.wide-button {
+  width: 200px;
+  margin-left: 0.25rem;
 }
 
 /* translateZ also need to match on lines 40 & 45 */
