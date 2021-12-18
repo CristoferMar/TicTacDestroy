@@ -20,7 +20,6 @@ we need to match the width and height on lines 6/7 & 23/24 */
 .nav-buttons-link::before,
 .nav-buttons-link::after {
   position: absolute;
-  /* content: "Sign Out"; */
   width: 120px;
   height: 35px;
   display: flex;
@@ -52,7 +51,7 @@ we need to match the width and height on lines 6/7 & 23/24 */
   margin-left: 0.25rem;
 }
 
-/* translateZ also need to match on lines 40 & 45 */
+/* translateZ also need to match on lines 63 & 57 */
 .nav-buttons-link::before {
   color: white;
   transform: rotateY(0deg) translateZ(15px);
