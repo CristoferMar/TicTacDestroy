@@ -1,5 +1,7 @@
 import React from 'react';
 import parseRoute from './lib/parse-route';
+import NavBar from './pages/nav-bar';
+import Lobby from './pages/lobby';
 // import Home from './pages/home';
 
 export default class App extends React.Component {
@@ -8,7 +10,6 @@ export default class App extends React.Component {
     this.state = {
       isAuthorizing: window.localStorage.getItem('tic-tac-destroy') === null,
       route: parseRoute(window.location.hash)
-
     };
   }
 
@@ -20,16 +21,20 @@ export default class App extends React.Component {
 
   renderPage() {
     const { route } = this.state;
-    console.log(route);
-    console.log('main branch established');
+    // console.log(route);
+    // console.log('main branch established');
     return (<div>{`we are currently on ${route.path}`}</div>);
   }
 
   render() {
+    console.log('this.state.route:', this.state.route);
+    const { path } = this.state.route;
+    const background = path === 'Game-Page' ? 'shootingStarBackground' : 'blue-radial';
     return (
-      <>
-        <div>{this.renderPage(this.state.route)}</div>
-      </>
+      <div className={`full-height ${background}`}>
+        <NavBar path={path} />
+        <Lobby />
+      </div>
     );
   }
 }

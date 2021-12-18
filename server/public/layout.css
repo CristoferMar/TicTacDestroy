@@ -1,0 +1,41 @@
+.nav-buttons,
+.nav-buttons-link,
+.nav-buttons-link::before,
+.nav-buttons-link::after {
+  font-size: 12px;
+  width: 80px;
+
+  /* height: 35px; */
+}
+
+.play-as-guest::before,
+.play-as-guest::after,
+.wide-button {
+  width: 125px;
+}
+
+.padding-5 {
+  padding: 1rem 0.25rem;
+}
+
+@media screen and (min-width: 625px) {
+  .nav-buttons,
+  .nav-buttons-link,
+  .nav-buttons-link::before,
+  .nav-buttons-link::after {
+    font-size: 19px;
+    width: 120px;
+
+    /* height: 35px; */
+  }
+
+  .play-as-guest::before,
+  .play-as-guest::after,
+  .wide-button {
+    width: 200px;
+  }
+
+  .padding-5 {
+    padding: 1rem 1.5rem;
+  }
+}
