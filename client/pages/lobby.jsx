@@ -10,7 +10,7 @@ export default class Lobby extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="full-width height-min-nav silver-border">
         <h1>HI</h1>
       </div>
     );

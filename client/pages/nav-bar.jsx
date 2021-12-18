@@ -1,12 +1,6 @@
 import React from 'react';
 
 export default class NavBar extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-    };
-    console.log('props bois:', props);
-  }
 
   render() {
     const path = this.props.path;
@@ -21,7 +15,7 @@ export default class NavBar extends React.Component {
           <>
             <img src="/images/small-logo.svg" alt="TicTacDestroy" className="height-90" />
             <div className="flex-between">
-              <span className="nav-buttons"><a href="#" className="nav-buttons-link sign-out-content"></a></span>
+              <span className="nav-buttons"><a href="#Sign-In" className="nav-buttons-link sign-out-content"></a></span>
             </div>
           </>
         }
@@ -34,8 +28,8 @@ export default class NavBar extends React.Component {
               : <img src="/images/small-logo.svg" alt="TicTacDestroy" className="height-90" />
           }
           <div className="flex-between">
-            <span className="nav-buttons"><a href="#" className="nav-buttons-link sign-in-content"></a></span>
-            <span className="nav-buttons wide-button"><a href="#" className="nav-buttons-link play-as-guest"></a></span>
+            <span className="nav-buttons"><a href="#Sign-In" className="nav-buttons-link sign-in-content"></a></span>
+            <span className="nav-buttons wide-button"><a href="#Lobby" className="nav-buttons-link play-as-guest"></a></span>
           </div>
         </>
         }

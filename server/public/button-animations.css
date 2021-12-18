@@ -4,7 +4,6 @@ we need to match the width and height on lines 6/7 & 23/24 */
 .nav-buttons {
   position: relative;
   display: inline-flex;
-  width: 120px;
   height: 35px;
   perspective: 1000px;
 }
@@ -20,8 +19,6 @@ we need to match the width and height on lines 6/7 & 23/24 */
 .nav-buttons-link::before,
 .nav-buttons-link::after {
   position: absolute;
-  /* content: "Sign Out"; */
-  width: 120px;
   height: 35px;
   display: flex;
   align-items: center;
@@ -44,11 +41,9 @@ we need to match the width and height on lines 6/7 & 23/24 */
 .play-as-guest::before,
 .play-as-guest::after {
   content: "Play as Guest";
-  width: 200px;
 }
 
 .wide-button {
-  width: 200px;
   margin-left: 0.25rem;
 }
 
