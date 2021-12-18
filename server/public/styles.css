@@ -2,6 +2,10 @@
   height: 100vh;
 }
 
+.height-min-nav {
+  height: 90vh;
+}
+
 .align-center {
   align-items: center;
 }
@@ -25,14 +29,14 @@
   justify-content: space-between;
 }
 
-.padding-5 {
-  padding: 1rem 1.5rem;
-}
-
 .margin-left {
   margin-left: 1rem;
 }
 
 .height-90 {
   height: 90%;
+}
+
+.silver-border {
+  border: 3px solid #e6efff;
 }
