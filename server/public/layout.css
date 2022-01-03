@@ -20,11 +20,17 @@
 
 .border {
   width: 90%;
-  height: 60%;
+
+  /* height: 60%; */
   border: 5px solid #e6efff;
   border-radius: 10px;
   max-width: 573px;
-  max-height: 557px;
+
+  /* max-height: 557px; */
+}
+
+.column {
+  flex-direction: column;
 }
 
 .custom-heading-1 {
@@ -55,7 +61,8 @@
 
   .border {
     width: 573px;
-    height: 60%;
+
+    /* height: 60%; */
 
     /* border: 2px solid #e6efff; */
 
