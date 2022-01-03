@@ -62,3 +62,114 @@ we need to match the width and height on lines 6/7 & 23/24 */
 .nav-buttons-link:hover {
   transform: translateZ(-25px) rotateX(-90deg);
 }
+
+/* ranbow light buttons */
+
+.buttons {
+  position: relative;
+  display: inline-block;
+  border-radius: 4px;
+  text-decoration: none;
+  text-transform: uppercase;
+  overflow: hidden;
+  font-family: Roboto, sans-serif;
+  border: 2px solid #cd1ccc;
+  transition: all 0.1s linear;
+
+  /* padding-top: 20px;
+  padding-bottom: 20px;
+  width: 10rem; */
+  text-align: center;
+}
+
+.buttons:hover {
+  border: 1px solid transparent;
+}
+
+.buttons:hover span {
+  position: absolute;
+  display: block;
+}
+
+.buttons:hover span:nth-child(1) {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #00f393);
+  animation: animate1 1s linear infinite;
+}
+
+@keyframes animate1 {
+  0% {
+    left: -100%;
+  }
+
+  50%,
+  100% {
+    left: 100%;
+  }
+}
+
+.buttons:hover span:nth-child(2) {
+  top: -100%;
+  right: 0;
+  width: 3px;
+  height: 100%;
+  background: linear-gradient(180deg, transparent, #e6efff);
+  animation: animate2 1s linear infinite;
+  animation-delay: 0.25s;
+}
+
+@keyframes animate2 {
+  0% {
+    top: -100%;
+  }
+
+  50%,
+  100% {
+    top: 100%;
+  }
+}
+
+.buttons:hover span:nth-child(3) {
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  background: linear-gradient(270deg, transparent, #cd1ccc);
+  animation: animate3 1s linear infinite;
+  animation-delay: 0.5s;
+}
+
+@keyframes animate3 {
+  0% {
+    right: -100%;
+    height: 3px;
+  }
+
+  50%,
+  100% {
+    right: 100%;
+  }
+}
+
+.buttons:hover span:nth-child(4) {
+  bottom: -100%;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  background: linear-gradient(360deg, transparent, #3a86ff);
+  animation: animate4 1s linear infinite;
+  animation-delay: 0.75s;
+}
+
+@keyframes animate4 {
+  0% {
+    bottom: -100%;
+  }
+
+  50%,
+  100% {
+    bottom: 100%;
+  }
+}
