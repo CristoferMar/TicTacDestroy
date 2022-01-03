@@ -63,7 +63,7 @@ we need to match the width and height on lines 6/7 & 23/24 */
   transform: translateZ(-25px) rotateX(-90deg);
 }
 
-.lobby-buttons {
+.buttons {
   position: relative;
   display: inline-block;
   border-radius: 4px;
@@ -74,22 +74,23 @@ we need to match the width and height on lines 6/7 & 23/24 */
   filter: hue-rotate(0deg);
   border: 2px solid #cd1ccc;
   transition: all 0.1s linear;
-  padding-top: 20px;
+
+  /* padding-top: 20px;
   padding-bottom: 20px;
-  width: 10rem;
+  width: 10rem; */
   text-align: center;
 }
 
-.lobby-buttons:hover {
+.buttons:hover {
   border: 1px solid transparent;
 }
 
-.lobby-buttons:hover span {
+.buttons:hover span {
   position: absolute;
   display: block;
 }
 
-.lobby-buttons:hover span:nth-child(1) {
+.buttons:hover span:nth-child(1) {
   filter: hue-rotate(0deg);
   top: 0;
   left: 0;
@@ -110,7 +111,7 @@ we need to match the width and height on lines 6/7 & 23/24 */
   }
 }
 
-.lobby-buttons:hover span:nth-child(2) {
+.buttons:hover span:nth-child(2) {
   filter: hue-rotate(60deg);
   top: -100%;
   right: 0;
@@ -132,7 +133,7 @@ we need to match the width and height on lines 6/7 & 23/24 */
   }
 }
 
-.lobby-buttons:hover span:nth-child(3) {
+.buttons:hover span:nth-child(3) {
   filter: hue-rotate(120deg);
   bottom: 0;
   right: 0;
@@ -155,7 +156,7 @@ we need to match the width and height on lines 6/7 & 23/24 */
   }
 }
 
-.lobby-buttons:hover span:nth-child(4) {
+.buttons:hover span:nth-child(4) {
   filter: hue-rotate(300deg);
   bottom: -100%;
   left: 0;

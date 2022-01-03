@@ -13,7 +13,7 @@ export default class NavBar extends React.Component {
         {
         single &&
           <>
-            <img src="/images/small-logo.svg" alt="TicTacDestroy" className="height-90" />
+            <img src="/images/small-logo.svg" alt="TicTacDestroy" className="height-70-90" />
             <div className="flex-between">
               <span className="nav-buttons"><a href="#Sign-In" className="nav-buttons-link sign-out-content"></a></span>
             </div>
@@ -25,7 +25,7 @@ export default class NavBar extends React.Component {
           {
             landing
               ? <div></div>
-              : <img src="/images/small-logo.svg" alt="TicTacDestroy" className="height-90" />
+              : <img src="/images/small-logo.svg" alt="TicTacDestroy" className="height-70-90" />
           }
           <div className="flex-between">
             <span className="nav-buttons"><a href="#Sign-In" className="nav-buttons-link sign-in-content"></a></span>
