@@ -29,7 +29,7 @@ export default class Lobby extends React.Component {
               </tr>
             </tbody>
          </table>
-         <div className="full-width padding-3-rem green flex-between">
+         <div className="full-width padding-3-rem green flex-around">
            <div className="buttons">
               <span></span>
               <span></span>

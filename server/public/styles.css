@@ -2,10 +2,6 @@
   height: 100vh;
 }
 
-.height-min-nav {
-  height: 90vh;
-}
-
 .align-center {
   align-items: center;
 }
@@ -32,6 +28,11 @@
   justify-content: space-between;
 }
 
+.flex-around {
+  display: flex;
+  justify-content: space-around;
+}
+
 .margin-left {
   margin-left: 1rem;
 }
@@ -53,8 +54,4 @@
 .white {
   color: #e6efff;
   font-family: Roboto, sans-serif;
-}
-
-.padding-3-rem {
-  padding: 3rem;
 }
