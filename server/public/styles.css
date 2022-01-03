@@ -10,6 +10,14 @@
   align-items: center;
 }
 
+.flex {
+  display: flex;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
 .blue-radial {
   background: rgb(0, 20, 108);
   background: radial-gradient(circle, rgba(0, 20, 108, 1) 48%, rgba(0, 2, 9, 1) 97%);
@@ -43,9 +51,10 @@
   align-items: center;
 }
 
-.border {
-  width: 40%;
-  height: 60%;
-  border: 2px solid #e6efff;
-  border-radius: 20px;
+.green {
+  color: #00f393;
+}
+
+.pink {
+  color: #cd1ccc;
 }

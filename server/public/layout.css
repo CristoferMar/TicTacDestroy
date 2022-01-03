@@ -18,6 +18,20 @@
   padding: 1rem 0.25rem;
 }
 
+.border {
+  width: 90%;
+  height: 60%;
+  border: 5px solid #e6efff;
+  border-radius: 10px;
+  max-width: 573px;
+  max-height: 557px;
+}
+
+.custom-heading-1 {
+  font-size: 40px;
+  padding: 25px;
+}
+
 @media screen and (min-width: 625px) {
   .nav-buttons,
   .nav-buttons-link,
@@ -38,4 +52,25 @@
   .padding-5 {
     padding: 1rem 1.5rem;
   }
+
+  .border {
+    width: 573px;
+    height: 60%;
+
+    /* border: 2px solid #e6efff; */
+
+    /* border-radius: 10px; */
+  }
+
+  .custom-heading-1 {
+    font-size: 48px;
+    padding: 40px;
+  }
 }
+
+/* @media screen and (min-width: 900px) {
+  .border {
+    width: 50%;
+    height: 60%;
+  }
+} */
