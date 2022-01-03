@@ -29,6 +29,22 @@ export default class Lobby extends React.Component {
               </tr>
             </tbody>
          </table>
+         <div className="full-width padding-3-rem green flex-between">
+           <div className="lobby-buttons">
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              Create Game
+           </div>
+           <div className="lobby-buttons">
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              Join Game
+           </div>
+         </div>
         </div>
       </div>
     );
