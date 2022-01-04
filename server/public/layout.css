@@ -33,6 +33,14 @@ td {
   height: 93vh;
 }
 
+.height-75-90 {
+  height: 90vh;
+}
+
+.height-160-300 {
+  height: 160px;
+}
+
 .height-70-90 {
   min-height: 30px;
   height: 2.15rem;
@@ -47,10 +55,6 @@ td {
   max-width: 573px;
 
   /* max-height: 557px; */
-}
-
-.column {
-  flex-direction: column;
 }
 
 .custom-heading-1 {
@@ -104,6 +108,14 @@ td {
 
   .height-min-nav {
     height: 90vh;
+  }
+
+  .height-75-90 {
+    height: 75vh;
+  }
+
+  .height-160-300 {
+    height: 300px;
   }
 
   .height-70-90 {
