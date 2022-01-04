@@ -2,7 +2,7 @@ import React from 'react';
 import parseRoute from './lib/parse-route';
 import NavBar from './pages/nav-bar';
 import Lobby from './pages/lobby';
-// import Landing from './pages/landing';
+import Landing from './pages/landing';
 // import Home from './pages/home';
 
 export default class App extends React.Component {
@@ -20,21 +20,25 @@ export default class App extends React.Component {
     });
   }
 
-  renderPage() {
-    const { route } = this.state;
-    // console.log(route);
-    // console.log('main branch established');
-    return (<div>{`we are currently on ${route.path}`}</div>);
+  renderPage(route) {
+    const { path } = route;
+
+    if (path === 'Landing-Page' || path === '') {
+      return <Landing />;
+    }
+    if (path === 'Lobby') {
+      return <Lobby />;
+    }
+
   }
 
   render() {
-    console.log('this.state.route:', this.state.route);
     const { path } = this.state.route;
     const background = path === 'Game-Page' ? 'shootingStarBackground' : 'blue-radial';
     return (
       <div className={`full-height ${background}`}>
         <NavBar path={path} />
-        <Lobby />
+        {this.renderPage(this.state.route)}
       </div>
     );
   }
