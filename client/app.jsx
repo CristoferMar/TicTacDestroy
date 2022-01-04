@@ -2,6 +2,7 @@ import React from 'react';
 import parseRoute from './lib/parse-route';
 import NavBar from './pages/nav-bar';
 import Lobby from './pages/lobby';
+// import Landing from './pages/landing';
 // import Home from './pages/home';
 
 export default class App extends React.Component {
