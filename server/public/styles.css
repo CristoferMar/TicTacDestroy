@@ -23,6 +23,10 @@
   width: 100%;
 }
 
+.column {
+  flex-direction: column;
+}
+
 .flex-between {
   display: flex;
   justify-content: space-between;
@@ -31,6 +35,11 @@
 .flex-around {
   display: flex;
   justify-content: space-around;
+}
+
+.flex-evenly {
+  display: flex;
+  justify-content: space-evenly;
 }
 
 .margin-left {
@@ -54,4 +63,28 @@
 .white {
   color: #e6efff;
   font-family: Roboto, sans-serif;
+}
+
+.overflow {
+  overflow: scroll;
+  height: 175px;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.overflow::-webkit-scrollbar {
+  height: 0;
+  width: 0;
+}
+
+.mt-0 {
+  margin-top: 0;
+}
+
+.mt-40 {
+  margin-top: 40px;
+}
+
+.test-margin {
+  margin: 7px;
 }
