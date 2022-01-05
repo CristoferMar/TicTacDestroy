@@ -5,8 +5,8 @@ export default class NavBar extends React.Component {
   render() {
     const path = this.props.path;
     const single = ['Lobby', 'Results'].includes(path);
-    const signOn = ['Sign-Up', 'Sign-In', 'Landing-Page'].includes(path);
-    const landing = path === 'Landing-Page';
+    const signOn = ['Sign-Up', 'Sign-In', 'Landing-Page', ''].includes(path);
+    const landing = (path === 'Landing-Page' || path === '');
     return (
       <div className="full-width height7-min40 flex-between padding-5 align-center">
 
