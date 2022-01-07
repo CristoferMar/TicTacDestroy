@@ -54,6 +54,42 @@ app.post('/api/auth/sign-up', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.get('/api/auth/sign-in', (req, res, next) => {
+  const { username, password } = req.body;
+  if (!username || !password) {
+    throw new ClientError(400, 'Username and password are required fields.');
+  }
+
+  const sql = `
+  select "userId", "hashedPassword"
+  from "users"
+  where "userName" = $1
+  `;
+  const params = [username];
+
+  db.query(sql, params)
+    .then(response => {
+      if (response.rowCount < 1) {
+        throw new ClientError(401, 'invalid login');
+      }
+
+      argon2.verify(response.rows[0].hashedPassword, password)
+        .then(matchTest => {
+          console.log('this is the response:', response);
+          if (!matchTest) {
+            throw new ClientError(401, 'invalid login');
+          } else {
+            const payload = { userId: response.rows[0].userId, username: username };
+            const token = jwt.sign(payload, process.env.TOKEN_SECRET);
+            const wholeResponse = { token: token, user: username };
+            res.status(200).json(wholeResponse);
+          }
+        })
+        .catch(err => next(err));
+    })
+    .catch(err => next(err));
+});
+
 app.use(authorizationMiddleware);
 // code post-authorization
 
