@@ -95,14 +95,12 @@ app.use(authorizationMiddleware);
 
 // ************** sql query for creating a game and returning the nessesary infomration:
 
-// insert into "games"("createdAt", "isActive", "player1", "player2")
-// values(now(), 'true', 1, 2)
-// returning "gameId", "player1", "player2", "gameTime"
-
 // games table may need more colums for customizable points **************
 
-// select random()*100
-// from generate_series(1, 10)
+// query geenrates any amount fo coordinates we want, and adds them into table
+// insert into "osuCoordinates"("gameId", "xAxis", "yAxis")
+// select 5, random() * 100, random() * 100
+// from generate_series(1, 150)
 
 app.use(errorMiddleware);
 
