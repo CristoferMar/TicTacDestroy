@@ -93,16 +93,21 @@ app.get('/api/auth/sign-in', (req, res, next) => {
 app.use(authorizationMiddleware);
 // code post-authorization
 
-// ************** sql query for creating a game and returning the nessesary infomration:
+// ************** sql query for creating a game and returning the necessary information:
 
 // insert into "games"("createdAt", "isActive", "player1", "player2")
 // values(now(), 'true', 1, 2)
 // returning "gameId", "player1", "player2", "gameTime"
 
-// games table may need more colums for customizable points **************
+// games table may need more columns for customizable points **************
 
+// can generate 100 random integers
 // select random()*100
 // from generate_series(1, 10)
+
+// insert into "osuCoordinates"("gameId", "xAxis", "yAxis")
+// values(5, random() * 100, random() * 100)
+// This query works to create one coordinate. But we still need to figure out how to generate 100+ in a series
 
 app.use(errorMiddleware);
 
