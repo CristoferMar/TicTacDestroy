@@ -93,14 +93,6 @@ app.get('/api/auth/sign-in', (req, res, next) => {
 app.use(authorizationMiddleware);
 // code post-authorization
 
-// ************** sql query for creating a game and returning the nessesary infomration:
-
-// insert into "games"("createdAt", "isActive", "player1", "player2")
-// values(now(), 'true', 1, 2)
-// returning "gameId", "player1", "player2", "gameTime"
-
-// games table may need more colums for customizable points **************
-
 app.use(errorMiddleware);
 
 app.listen(process.env.PORT, () => {
