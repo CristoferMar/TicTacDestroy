@@ -95,28 +95,16 @@ app.use(authorizationMiddleware);
 
 // ************** sql query for creating a game and returning the necessary information:
 
-<<<<<<< HEAD
-// games table may need more colums for customizable points **************
-
-// query geenrates any amount fo coordinates we want, and adds them into table
-// insert into "osuCoordinates"("gameId", "xAxis", "yAxis")
-// select 5, random() * 100, random() * 100
-// from generate_series(1, 150)
-=======
 // insert into "games"("createdAt", "isActive", "player1", "player2")
 // values(now(), 'true', 1, 2)
 // returning "gameId", "player1", "player2", "gameTime"
 
-// games table may need more columns for customizable points **************
+// games table may need more columns for customizable point settings **************
 
-// can generate 100 random integers
-// select random()*100
-// from generate_series(1, 10)
->>>>>>> f69bcd74a147c366d9162f58299c892d932d36af
-
+// generates n amount of coordinates and inserts them into coordinate tabe
 // insert into "osuCoordinates"("gameId", "xAxis", "yAxis")
-// values(5, random() * 100, random() * 100)
-// This query works to create one coordinate. But we still need to figure out how to generate 100+ in a series
+// select 5, random() * 100, random() * 100
+// from generate_series(1, 150)
 
 app.use(errorMiddleware);
 
