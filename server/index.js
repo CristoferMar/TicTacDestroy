@@ -101,6 +101,9 @@ app.use(authorizationMiddleware);
 
 // games table may need more colums for customizable points **************
 
+// select random()*100
+// from generate_series(1, 10)
+
 app.use(errorMiddleware);
 
 app.listen(process.env.PORT, () => {
