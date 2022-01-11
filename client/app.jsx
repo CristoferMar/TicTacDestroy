@@ -4,6 +4,7 @@ import NavBar from './pages/nav-bar';
 import Lobby from './pages/lobby';
 import Landing from './pages/landing';
 // import Home from './pages/home';
+import Chat from './pages/chat';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -29,7 +30,9 @@ export default class App extends React.Component {
     if (path === 'Lobby') {
       return <Lobby />;
     }
-
+    if (path === 'Chat') {
+      return <Chat />;
+    }
   }
 
   render() {
