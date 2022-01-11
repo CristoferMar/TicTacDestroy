@@ -7,6 +7,12 @@ const staticMiddleware = require('./static-middleware');
 const argon2 = require('argon2');
 const jwt = require('jsonwebtoken');
 const authorizationMiddleware = require('./authorization-middleware');
+// brought in socket.io & socket.io-client
+const socket = require('socket.io')(3000, {
+  cors: {
+    origin: ['http://localhost:2222']
+  }
+});
 
 const db = new pg.Pool({
   connectionString: process.env.DATABASE_URL,
@@ -101,14 +107,23 @@ app.use(authorizationMiddleware);
 
 // games table may need more columns for customizable point settings **************
 
-// generates n amount of coordinates and inserts them into coordinate tabe
+// generates n amount of coordinates and inserts them into coordinate table
 // insert into "osuCoordinates"("gameId", "xAxis", "yAxis")
 // select 5, random() * 100, random() * 100
 // from generate_series(1, 150)
 
 app.use(errorMiddleware);
 
-app.listen(process.env.PORT, () => {
+// assigned the app.listen method into a variable so that we can use it below for socket.io
+const server = app.listen(process.env.PORT, () => {
   // eslint-disable-next-line no-console
   console.log(`express server listening on port ${process.env.PORT}`);
+});
+
+// Socket setup
+const io = socket(server);
+
+io.on('connection', socket => {
+  console.log('made socket connection');
+  console.log('this is the socketid:', socket.id);
 });
