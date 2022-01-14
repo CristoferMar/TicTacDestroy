@@ -6,12 +6,31 @@ const errorMiddleware = require('./error-middleware');
 const staticMiddleware = require('./static-middleware');
 const argon2 = require('argon2');
 const jwt = require('jsonwebtoken');
-const authorizationMiddleware = require('./authorization-middleware');
+// const authorizationMiddleware = require('./authorization-middleware');
 // brought in socket.io & socket.io-client
-const socket = require('socket.io')(3000, {
+const http = require('http');
+const { Server } = require('socket.io');
+
+// const io = new Server(server);
+
+// const socket = require('socket.io')(process.env.PORT, {
+//   cors: {
+//     origin: ['http://localhost:2222']
+//   }
+// });
+
+const app = express();
+const server = http.createServer(app);
+const io = new Server(server, {
   cors: {
-    origin: ['http://localhost:2222']
+    origin: 'http://localhost:2222'
   }
+});
+
+io.on('connect', socket => {
+  console.log('made socket connection');
+  console.log('this is the socket.id:', socket.id);
+  // io.emit()
 });
 
 const db = new pg.Pool({
@@ -21,7 +40,7 @@ const db = new pg.Pool({
   }
 });
 
-const app = express();
+// const app = express();
 
 const jsonMiddleware = express.json();
 
@@ -96,7 +115,7 @@ app.get('/api/auth/sign-in', (req, res, next) => {
     .catch(err => next(err));
 });
 
-app.use(authorizationMiddleware);
+// app.use(authorizationMiddleware);
 // code post-authorization
 
 // ************** sql query for creating a game and returning the necessary information:
@@ -114,16 +133,22 @@ app.use(authorizationMiddleware);
 
 app.use(errorMiddleware);
 
-// assigned the app.listen method into a variable so that we can use it below for socket.io
-const server = app.listen(process.env.PORT, () => {
+server.listen(process.env.PORT, () => {
   // eslint-disable-next-line no-console
   console.log(`express server listening on port ${process.env.PORT}`);
 });
 
-// Socket setup
-const io = socket(server);
+// assigned the app.listen method into a variable so that we can use it below for socket.io
+// const server = app.listen(process.env.PORT, () => {
+//   // eslint-disable-next-line no-console
+//   console.log(`express server listening on port ${process.env.PORT}`);
+// });
 
-io.on('connection', socket => {
-  console.log('made socket connection');
-  console.log('this is the socketid:', socket.id);
-});
+// // Socket setup
+// const io = socket(server);
+
+// io.on('connection', socket => {
+//   console.log('made socket connection');
+//   console.log('this is the socket.id:', socket.id);
+//   // io.emit()
+// });
