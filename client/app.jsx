@@ -16,15 +16,19 @@ export default class App extends React.Component {
       route: parseRoute(window.location.hash),
       ioMessage: ''
     };
-    this.socket = io('http://localhost:2220');
   }
 
   componentDidMount() {
-    console.log('testing socnole.log');
-    this.socket.on('connect', socket => {
-      console.log('connected');
-      console.log(`connected on socket.id: ${socket.id}`);
+    this.socket = io('http://localhost:2220');
+    const { socket } = this;
+    socket.on('connect', () => {
+      console.log('socket.id:', socket.id);
     });
+    // console.log('testing socnole.log');
+    // this.socket.on('connect', socket => {
+    //   console.log('connected');
+    //   console.log(`connected on socket.id: ${socket.id}`);
+    // });
     window.addEventListener('hashchange', () => {
       this.setState({ route: parseRoute(window.location.hash) });
     });
