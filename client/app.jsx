@@ -48,8 +48,8 @@ export default class App extends React.Component {
     return (
       <div className={`full-height ${background}`}>
         <NavBar path={path} />
-        <div>{this.state.ioMessage}</div>
-        {/* {this.renderPage(this.state.route)} */}
+        {/* <div>{this.state.ioMessage}</div> */}
+        {this.renderPage(this.state.route)}
       </div>
     );
   }

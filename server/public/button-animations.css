@@ -286,3 +286,35 @@ we need to match the width and height on lines 6/7 & 23/24 */
     bottom: 100%;
   }
 }
+
+/* THIS IS THE CIRCLE COUNT-DOWN ANNIMATION (PIE) */
+
+/* INSERT INTO REACT WITH THE FOLLOWING HTML
+<div class="chart">A</div>
+*/
+
+@property --percentage {
+  initial-value: 0%;
+  inherits: false;
+  syntax: "<percentage>";
+}
+
+.chart {
+  color: #00f393;
+  font-size: 9rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: conic-gradient(rgb(159, 170, 192, 0) var(--percentage), #9faac0 0);
+  border-radius: 50%;
+  border: 5px solid #00f393;
+  width: 80vmin;
+  height: 80vmin;
+  animation: timer 4s infinite linear;
+}
+
+@keyframes timer {
+  to {
+    --percentage: 100%;
+  }
+}
