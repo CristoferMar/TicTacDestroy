@@ -15,24 +15,11 @@ export default class Lobby extends React.Component {
          <div className="custom-heading-1">
            <span className="green">Game</span> <span className="pink">Lobby</span>
          </div>
-         {/* <table>
-            <thead>
-              <tr>
-                <th className="white">Host</th>
-                <th className="white">Players</th>
-              </tr>
-            </thead>
-            <tbody className="table">
-              <tr>
-                <td className="white">sadfsda</td>
-                <td className="white">sadfadsf</td>
-              </tr>
-            </tbody>
-         </table> */}
-        <div className="full-width flex-evenly">
+         <div className="full-width flex-evenly">
           <h2 className="white mt-0">Host</h2>
           <h2 className="white mt-0">Players</h2>
         </div>
+
          <div className="overflow full-width">
             <div className="full-width flex-evenly">
               <p className="white test-margin">Host2</p>
