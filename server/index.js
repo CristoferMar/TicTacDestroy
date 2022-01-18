@@ -34,10 +34,11 @@ io.on('connect', socket => {
 });
 
 const db = new pg.Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: {
-    rejectUnauthorized: false
-  }
+  connectionString: process.env.DATABASE_URL
+  // ,
+  // ssl: {
+  //   rejectUnauthorized: false
+  // }
 });
 
 // const app = express();
@@ -50,6 +51,7 @@ app.use(staticMiddleware);
 
 // login code
 app.post('/api/auth/sign-up', (req, res, next) => {
+
   const { username, password } = req.body;
   if (!username || !password) {
     throw new ClientError(400, 'Username and password are required fields.');
