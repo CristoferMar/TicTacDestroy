@@ -14,8 +14,11 @@ export default class App extends React.Component {
     this.state = {
       isAuthorizing: window.localStorage.getItem('tic-tac-destroy') === null,
       route: parseRoute(window.location.hash),
-      ioMessage: ''
+      ioMessage: '',
+      basketball: ''
     };
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   componentDidMount() {
@@ -32,6 +35,16 @@ export default class App extends React.Component {
     window.addEventListener('hashchange', () => {
       this.setState({ route: parseRoute(window.location.hash) });
     });
+  }
+
+  handleSubmit() {
+    event.preventDefault();
+    console.log(this.state.basketball);
+  }
+
+  handleChange() {
+    const { name, value } = event.target;
+    this.setState({ [name]: value });
   }
 
   renderPage(route) {
@@ -52,8 +65,13 @@ export default class App extends React.Component {
     return (
       <div className={`full-height ${background}`}>
         <NavBar path={path} />
-        {/* <div>{this.state.ioMessage}</div> */}
-        {this.renderPage(this.state.route)}
+        <div>
+          <form onSubmit={this.handleSubmit}>
+            <input type="text" onChange={this.handleChange} placeholder="type here..." name="basketball"></input>
+            <button>push me</button>
+          </form>
+          {this.state.ioMessage}</div>
+        {/* {this.renderPage(this.state.route)} */}
       </div>
     );
   }
