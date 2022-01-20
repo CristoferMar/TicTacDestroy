@@ -19,13 +19,17 @@ export default class App extends React.Component {
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.socket = io('http://localhost:2220');
   }
 
   componentDidMount() {
-    this.socket = io('http://localhost:2220');
     const { socket } = this;
     socket.on('connect', () => {
       console.log('socket.id:', socket.id);
+    });
+
+    socket.on('tellsEveryone', entry => {
+      console.log('Prson says this:', entry);
     });
     // console.log('testing socnole.log');
     // this.socket.on('connect', socket => {
@@ -39,7 +43,11 @@ export default class App extends React.Component {
 
   handleSubmit() {
     event.preventDefault();
-    console.log(this.state.basketball);
+    const { socket } = this;
+    socket.emit('messageFromClient', this.state.basketball);
+    // console.log(this.state.basketball);
+    this.setState({ basketball: '' });
+    event.target[0].value = '';
   }
 
   handleChange() {
