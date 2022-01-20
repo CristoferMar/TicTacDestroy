@@ -31,6 +31,13 @@ io.on('connect', socket => {
   console.log('made socket connection');
   console.log('this is the socket.id:', socket.id);
   // io.emit()
+  socket.on('messageFromClient', entry => {
+    console.log('entry:', entry);
+
+    // io.emit('tellsEveryone', entry); replays to literally every socket
+
+    socket.broadcast.emit('tellsEveryone', entry); // relays to everyone, except the sender
+  });
 });
 
 const db = new pg.Pool({
