@@ -1,5 +1,6 @@
 import React from 'react';
 import LobbyGames from './lobby-games';
+import AppContext from '../lib/app-context';
 
 export default class Lobby extends React.Component {
   constructor(props) {
@@ -9,7 +10,12 @@ export default class Lobby extends React.Component {
     };
   }
 
+  componentDidMount() {
+    fetch();
+  }
+
   render() {
+    console.log(this.context);
     return (
       <div className="full-width height-min-nav center-all">
        <div className="border flex align-center column">
@@ -45,3 +51,5 @@ export default class Lobby extends React.Component {
     );
   }
 }
+
+Lobby.contextType = AppContext;

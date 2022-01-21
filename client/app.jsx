@@ -5,6 +5,7 @@ import Lobby from './pages/lobby';
 import Landing from './pages/landing';
 // import Home from './pages/home';
 import { io } from 'socket.io-client';
+import AppContext from './lib/app-context';
 
 // const socket = io.connect('http://localhost:2220');
 
@@ -70,17 +71,20 @@ export default class App extends React.Component {
   render() {
     const { path } = this.state.route;
     const background = path === 'Game-Page' ? 'shootingStarBackground' : 'blue-radial';
+    const contextValue = { name: 'daniel', age: 29 };
     return (
-      <div className={`full-height ${background}`}>
-        <NavBar path={path} />
-        <div>
-          <form onSubmit={this.handleSubmit}>
-            <input type="text" onChange={this.handleChange} placeholder="type here..." name="basketball"></input>
-            <button>push me</button>
-          </form>
-          {this.state.ioMessage}</div>
-        {/* {this.renderPage(this.state.route)} */}
-      </div>
+      <AppContext.Provider value={contextValue}>
+        <div className={`full-height ${background}`}>
+          <NavBar path={path} />
+          <div>
+            {/* <form onSubmit={this.handleSubmit}>
+              <input type="text" onChange={this.handleChange} placeholder="type here..." name="basketball"></input>
+              <button>push me</button>
+            </form> */}
+            {this.state.ioMessage}</div>
+          {this.renderPage(this.state.route)}
+        </div>
+      </AppContext.Provider>
     );
   }
 }

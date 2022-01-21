@@ -7,17 +7,10 @@ const staticMiddleware = require('./static-middleware');
 const argon2 = require('argon2');
 const jwt = require('jsonwebtoken');
 // const authorizationMiddleware = require('./authorization-middleware');
+
 // brought in socket.io & socket.io-client
 const http = require('http');
 const { Server } = require('socket.io');
-
-// const io = new Server(server);
-
-// const socket = require('socket.io')(process.env.PORT, {
-//   cors: {
-//     origin: ['http://localhost:2222']
-//   }
-// });
 
 const app = express();
 const server = http.createServer(app);
@@ -38,17 +31,15 @@ io.on('connect', socket => {
 
     socket.broadcast.emit('tellsEveryone', entry); // relays to everyone, except the sender
   });
+
+  socket.on('disconnect', () => {
+    console.log('User d/c', socket.id);
+  });
 });
 
 const db = new pg.Pool({
   connectionString: process.env.DATABASE_URL
-  // ,
-  // ssl: {
-  //   rejectUnauthorized: false
-  // }
 });
-
-// const app = express();
 
 const jsonMiddleware = express.json();
 
@@ -120,6 +111,22 @@ app.get('/api/auth/sign-in', (req, res, next) => {
           }
         })
         .catch(err => next(err));
+    })
+    .catch(err => next(err));
+});
+
+app.get('/api/openGames', (req, res, next) => {
+  const sql = `
+  select "userId" as "player1", "userName" as "hostName", "gameId"
+  from "users"
+  inner join "games" on "users"."userId" = "games"."player1"
+  where "isActive" = $1
+  `;
+  const params = [true];
+  db.query(sql, params)
+    .then(result => {
+      console.log(result);
+      res.json(result.rows);
     })
     .catch(err => next(err));
 });
