@@ -21,12 +21,12 @@ CREATE TABLE "public"."users" (
 CREATE TABLE "public"."games" (
 	"gameId" serial NOT NULL UNIQUE,
 	"createdAt" timestamp with time zone NOT NULL,
-	"isActive" BOOLEAN NOT NULL,
+	"isActive" BOOLEAN NOT NULL DEFAULT 'true',
 	"player1" integer NOT NULL,
 	"player2" integer NOT NULL,
-	"player1Score" integer NOT NULL,
-	"player2Score" integer NOT NULL,
-	"gameTime" integer NOT NULL,
+	"player1Score" integer NOT NULL DEFAULT '0',
+	"player2Score" integer NOT NULL DEFAULT '0',
+	"gameTime" integer NOT NULL DEFAULT '120',
 	CONSTRAINT "games_pk" PRIMARY KEY ("gameId")
 ) WITH (
   OIDS=FALSE
