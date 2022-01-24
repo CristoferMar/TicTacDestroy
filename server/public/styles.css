@@ -88,3 +88,8 @@
 .test-margin {
   margin: 7px;
 }
+
+.fixed-width {
+  width: 20%;
+  text-align: center;
+}

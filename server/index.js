@@ -117,7 +117,7 @@ app.get('/api/auth/sign-in', (req, res, next) => {
 
 app.get('/api/openGames', (req, res, next) => {
   const sql = `
-  select "userId" as "player1", "userName" as "hostName", "gameId"
+  select "userId" as "player1", "userName" as "hostName", "gameId", "isActive"
   from "users"
   inner join "games" on "users"."userId" = "games"."player1"
   where "isActive" = $1
