@@ -63,7 +63,7 @@ we need to match the width and height on lines 6/7 & 23/24 */
   transform: translateZ(-25px) rotateX(-90deg);
 }
 
-/* ranbow light buttons */
+/* rainbow light buttons */
 
 .buttons {
   position: relative;
@@ -193,6 +193,7 @@ we need to match the width and height on lines 6/7 & 23/24 */
   transition: all 0.1s linear;
   padding: 10px;
   text-align: center;
+  min-height: 2.8rem;
 }
 
 .register:hover {

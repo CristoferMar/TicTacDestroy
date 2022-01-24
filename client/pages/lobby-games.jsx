@@ -1,36 +1,15 @@
 import React, { useState } from 'react';
 
 export default function LobbyGames(props) {
+  console.log('props: ', props);
   return (
-    <div className="overflow full-width">
-      <div className="full-width flex-evenly">
-        <p className="white test-margin">Host2</p>
-        <p className="white test-margin">Players</p>
+    <>
+      <div className='fixed-width'>
+        <p className="white test-margin">{props.hostName}</p>
       </div>
-      <div className="full-width flex-evenly">
-        <p className="white test-margin">Host3</p>
-        <p className="white test-margin">Players</p>
+      <div className='fixed-width'>
+        <p className="white test-margin">1/2</p>
       </div>
-      <div className="full-width flex-evenly">
-        <p className="white test-margin">Host4</p>
-        <p className="white test-margin">Players</p>
-      </div>
-      <div className="full-width flex-evenly">
-        <p className="white test-margin">Host5</p>
-        <p className="white test-margin">Players</p>
-      </div>
-      <div className="full-width flex-evenly">
-        <p className="white test-margin">Host6</p>
-        <p className="white test-margin">Players</p>
-      </div>
-      <div className="full-width flex-evenly">
-        <p className="white test-margin">Host7</p>
-        <p className="white test-margin">Players</p>
-      </div>
-      <div className="full-width flex-evenly">
-        <p className="white test-margin">Host8</p>
-        <p className="white test-margin">Players</p>
-      </div>
-    </div>
+    </>
   );
 }
