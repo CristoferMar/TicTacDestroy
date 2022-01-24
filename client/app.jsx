@@ -37,6 +37,9 @@ export default class App extends React.Component {
     //   console.log('connected');
     //   console.log(`connected on socket.id: ${socket.id}`);
     // });
+    socket.on('newGameCreated', entry => {
+      console.log('NEW GAME CREATED:', entry);
+    });
     window.addEventListener('hashchange', () => {
       this.setState({ route: parseRoute(window.location.hash) });
     });
@@ -77,12 +80,12 @@ export default class App extends React.Component {
         <div className={`full-height ${background}`}>
           <NavBar path={path} />
           <div>
-            {/* <form onSubmit={this.handleSubmit}>
+            <form onSubmit={this.handleSubmit}>
               <input type="text" onChange={this.handleChange} placeholder="type here..." name="basketball"></input>
               <button>push me</button>
-            </form> */}
+            </form>
             {this.state.ioMessage}</div>
-          {this.renderPage(this.state.route)}
+          {/* {this.renderPage(this.state.route)} */}
         </div>
       </AppContext.Provider>
     );

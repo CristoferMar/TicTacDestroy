@@ -1,6 +1,10 @@
 import React from 'react';
 import LobbyGames from './lobby-games';
 import AppContext from '../lib/app-context';
+// if user has a game that isActive with them being player1 in a lobby
+// redirect to game page **********REMEMBER TO DO THIS LOGIC WHEN WE HAVE A SIGN IN PAGE***********
+// on sign-on check games to see if there is a game where active equals true and player1 equals userId
+// if result.row[0] is empty direct to lobby else direct to game. *******REMEMBER TO DO THIS**********
 
 export default class Lobby extends React.Component {
   constructor(props) {
