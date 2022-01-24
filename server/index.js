@@ -131,6 +131,25 @@ app.get('/api/openGames', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.post('/api/createGames', (req, res, next) => {
+  const { userId } = req.body;
+  if (!userId) {
+    throw new ClientError(401, 'userId required');
+  }
+  const sql = `
+  insert into "games"("createdAt", "isActive", "player1")
+    values(now(), 'true', $1)
+    returning "gameId", "player1", "gameTime"
+  `;
+  const params = [userId];
+  db.query(sql, params)
+    .then(result => {
+      console.log('NEW GAME result:', result);
+      res.status(200).json(result.rows[0]);
+    })
+    .catch(err => next(err));
+});
+
 // app.use(authorizationMiddleware);
 // code post-authorization
 
