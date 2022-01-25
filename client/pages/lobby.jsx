@@ -12,6 +12,7 @@ export default class Lobby extends React.Component {
     this.state = {
       activeGames: []
     };
+    this.handleNewGame = this.handleNewGame.bind(this);
   }
 
   componentDidMount() {
@@ -19,6 +20,24 @@ export default class Lobby extends React.Component {
       .then(response => response.json())
       .then(result => {
         this.setState({ activeGames: result });
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  }
+
+  handleNewGame() {
+    console.log('newGame button pressed!');
+    const req = {
+      method: 'POST',
+      headers: {
+        userId: 1
+      }
+    };
+    fetch('/api/createGame', req)
+      .then(response => response.json())
+      .then(result => {
+        console.log(result);
       })
       .catch(err => {
         console.error(err);
@@ -53,7 +72,7 @@ export default class Lobby extends React.Component {
         </div>
 
         <div className="full-width padding-3-rem green flex-evenly">
-          <div className="buttons">
+            <div className="buttons" onClick={this.handleNewGame}>
             <span></span>
             <span></span>
             <span></span>

@@ -32,6 +32,10 @@ io.on('connect', socket => {
     socket.broadcast.emit('tellsEveryone', entry); // relays to everyone, except the sender
   });
 
+  socket.on('join lobby', () => {
+    socket.join('lobby');
+  });
+
   socket.on('disconnect', () => {
     console.log('User d/c', socket.id);
   });
@@ -144,7 +148,8 @@ app.post('/api/createGames', (req, res, next) => {
   const params = [userId];
   db.query(sql, params)
     .then(result => {
-      console.log('NEW GAME result:', result);
+      // io.to('lobby').emit(result.rows[0]);
+      // console.log('NEW GAME result:', result);
       res.status(200).json(result.rows[0]);
     })
     .catch(err => next(err));

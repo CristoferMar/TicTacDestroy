@@ -16,7 +16,9 @@ export default class App extends React.Component {
       isAuthorizing: window.localStorage.getItem('tic-tac-destroy') === null,
       route: parseRoute(window.location.hash),
       ioMessage: '',
-      basketball: ''
+      basketball: '',
+      activeGames: []
+
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -39,7 +41,11 @@ export default class App extends React.Component {
     // });
     socket.on('newGameCreated', entry => {
       console.log('NEW GAME CREATED:', entry);
+      // this.setState({ activeGames: this.state.activeGames.push(entry) });
     });
+
+    socket.emit('join lobby');
+
     window.addEventListener('hashchange', () => {
       this.setState({ route: parseRoute(window.location.hash) });
     });
@@ -79,13 +85,14 @@ export default class App extends React.Component {
       <AppContext.Provider value={contextValue}>
         <div className={`full-height ${background}`}>
           <NavBar path={path} />
-          <div>
+          {/* <div>
             <form onSubmit={this.handleSubmit}>
               <input type="text" onChange={this.handleChange} placeholder="type here..." name="basketball"></input>
               <button>push me</button>
             </form>
-            {this.state.ioMessage}</div>
-          {/* {this.renderPage(this.state.route)} */}
+            {this.state.ioMessage}
+          </div> */}
+          {this.renderPage(this.state.route)}
         </div>
       </AppContext.Provider>
     );
