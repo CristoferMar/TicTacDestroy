@@ -20,7 +20,7 @@ const io = new Server(server, {
   }
 });
 
-io.on('connect-lobby', socket => {
+io.on('connection', socket => {
   console.log('made socket connection');
   console.log('this is the socket.id:', socket.id);
   // io.emit()
@@ -31,7 +31,7 @@ io.on('connect-lobby', socket => {
     // io.emit('tellsEveryone', entry); replays to literally every socket
   });
 
-  socket.join('lobby');
+  // socket.join('lobby');
 
   socket.on('disconnect', () => {
     console.log('User d/c', socket.id);

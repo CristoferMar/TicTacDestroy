@@ -37,6 +37,11 @@ export default class App extends React.Component {
 
   }
 
+  // can move the socket connection into app.jsx
+  // pass this.socket via context
+  // when they go into lobby page, put them into a lobby room, or when they
+  // go into a private room, put them in a private room
+
   render() {
     const { path } = this.state.route;
     const background = path === 'Game-Page' ? 'shootingStarBackground' : 'blue-radial';
