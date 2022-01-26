@@ -26,13 +26,13 @@ export default class Lobby extends React.Component {
     console.log('Did the page load already?');
 
     const { socket } = this;
-    socket.on('connect-lobby', () => {
+    socket.on('connect', () => {
       console.log('socket.id:', socket.id);
-      socket.join('join lobby');
+      // socket.join('join lobby');
     });
 
     socket.on('tellsEveryone', entry => {
-      console.log('Prson says this:', entry);
+      console.log('Person says this:', entry);
     });
 
     socket.on('newGameCreated', entry => {
@@ -77,7 +77,6 @@ export default class Lobby extends React.Component {
     event.preventDefault();
     const { socket } = this;
     socket.emit('messageFromClient', this.state.basketball);
-    // console.log(this.state.basketball);
     this.setState({ basketball: '' });
     event.target[0].value = '';
   }
@@ -88,7 +87,7 @@ export default class Lobby extends React.Component {
   }
 
   render() {
-    console.log('this.context:', this.context);
+    // console.log('this.context:', this.context);
     return (
       <div className="full-width height-min-nav center-all">
         <div>
