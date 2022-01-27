@@ -20,17 +20,18 @@ const io = new Server(server, {
   }
 });
 
-io.on('connect', socket => {
+io.on('connection', socket => {
   console.log('made socket connection');
   console.log('this is the socket.id:', socket.id);
   // io.emit()
+
   socket.on('messageFromClient', entry => {
     console.log('entry:', entry);
-
-    // io.emit('tellsEveryone', entry); replays to literally every socket
-
     socket.broadcast.emit('tellsEveryone', entry); // relays to everyone, except the sender
+    // io.emit('tellsEveryone', entry); replays to literally every socket
   });
+
+  // socket.join('lobby');
 
   socket.on('disconnect', () => {
     console.log('User d/c', socket.id);
@@ -131,8 +132,11 @@ app.get('/api/openGames', (req, res, next) => {
     .catch(err => next(err));
 });
 
-app.post('/api/createGames', (req, res, next) => {
+app.post('/api/createGame', (req, res, next) => {
   const { userId } = req.body;
+  // userId = parseInt(userId);
+  console.log('********req:******', req);
+  console.log('userId as num:', userId);
   if (!userId) {
     throw new ClientError(401, 'userId required');
   }
@@ -144,7 +148,8 @@ app.post('/api/createGames', (req, res, next) => {
   const params = [userId];
   db.query(sql, params)
     .then(result => {
-      console.log('NEW GAME result:', result);
+      io.to('lobby').emit(result.rows[0]);
+      console.log('**********NEW GAME result:*****************', result.rows[0]);
       res.status(200).json(result.rows[0]);
     })
     .catch(err => next(err));

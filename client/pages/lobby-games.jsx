@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 export default function LobbyGames(props) {
-  console.log('props: ', props);
+  // console.log('props: ', props);
   return (
     <>
       <div className='fixed-width'>
