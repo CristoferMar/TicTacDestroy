@@ -1,7 +1,7 @@
 import React from 'react';
 import LobbyGames from './lobby-games';
 import AppContext from '../lib/app-context';
-import { io } from 'socket.io-client';
+// import { io } from 'socket.io-client';
 
 // if user has a game that isActive with them being player1 in a lobby
 // redirect to game page **********REMEMBER TO DO THIS LOGIC WHEN WE HAVE A SIGN IN PAGE***********
@@ -13,23 +13,23 @@ export default class Lobby extends React.Component {
     super(props);
     this.state = {
       activeGames: [],
-      basketball: ''
+      basketball: '',
+      socket: {}
     };
-    this.socket = io('http://localhost:2220');
     this.handleNewGame = this.handleNewGame.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
 
   componentDidMount() {
-
-    console.log('Did the page load already?');
-
-    const { socket } = this;
-    socket.on('connect', () => {
-      console.log('socket.id:', socket.id);
-      // socket.join('join lobby');
-    });
+    console.log('this.context', this.context.socket);
+    // const socket = io('http://localhost:2220');
+    const { socket } = this.context;
+    this.setState({ socket: socket });
+    // socket.on('connect', () => {
+    //   console.log('this.socket.id:', socket.id);
+    //   // socket.join('join lobby');
+    // });
 
     socket.on('tellsEveryone', entry => {
       console.log('Person says this:', entry);
@@ -50,6 +50,7 @@ export default class Lobby extends React.Component {
       .catch(err => {
         console.error(err);
       });
+    console.log('Did the page load already?');
   }
 
   handleNewGame() {
@@ -76,6 +77,7 @@ export default class Lobby extends React.Component {
   handleSubmit() {
     event.preventDefault();
     const { socket } = this;
+    console.log('socket.Id:', socket.id);
     socket.emit('messageFromClient', this.state.basketball);
     this.setState({ basketball: '' });
     event.target[0].value = '';

@@ -26,7 +26,7 @@ io.on('connection', socket => {
   // io.emit()
 
   socket.on('messageFromClient', entry => {
-    console.log('entry:', entry);
+    // console.log('entry:', entry);
     socket.broadcast.emit('tellsEveryone', entry); // relays to everyone, except the sender
     // io.emit('tellsEveryone', entry); replays to literally every socket
   });
@@ -101,7 +101,7 @@ app.get('/api/auth/sign-in', (req, res, next) => {
 
       argon2.verify(response.rows[0].hashedPassword, password)
         .then(matchTest => {
-          console.log('this is the response:', response);
+          // console.log('this is the response:', response);
           if (!matchTest) {
             throw new ClientError(401, 'invalid login');
           } else {
@@ -126,7 +126,7 @@ app.get('/api/openGames', (req, res, next) => {
   const params = [true];
   db.query(sql, params)
     .then(result => {
-      console.log(result);
+      // console.log(result);
       res.json(result.rows);
     })
     .catch(err => next(err));
@@ -135,8 +135,8 @@ app.get('/api/openGames', (req, res, next) => {
 app.post('/api/createGame', (req, res, next) => {
   const { userId } = req.body;
   // userId = parseInt(userId);
-  console.log('********req:******', req);
-  console.log('userId as num:', userId);
+  // console.log('********req:******', req);
+  // console.log('userId as num:', userId);
   if (!userId) {
     throw new ClientError(401, 'userId required');
   }
@@ -149,7 +149,7 @@ app.post('/api/createGame', (req, res, next) => {
   db.query(sql, params)
     .then(result => {
       io.to('lobby').emit(result.rows[0]);
-      console.log('**********NEW GAME result:*****************', result.rows[0]);
+      // console.log('**********NEW GAME result:*****************', result.rows[0]);
       res.status(200).json(result.rows[0]);
     })
     .catch(err => next(err));
