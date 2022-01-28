@@ -25,11 +25,16 @@ io.on('connection', socket => {
   console.log('this is the socket.id:', socket.id);
   // io.emit()
 
+  // console.log('socket.id:', socket.id);
   socket.on('messageFromClient', entry => {
     // console.log('entry:', entry);
     socket.broadcast.emit('tellsEveryone', entry); // relays to everyone, except the sender
     // io.emit('tellsEveryone', entry); replays to literally every socket
   });
+
+  // socket.on('onLobby', () => {
+  //   socket.join('lobby');
+  // });
 
   // socket.join('lobby');
 
