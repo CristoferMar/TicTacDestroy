@@ -32,11 +32,16 @@ io.on('connection', socket => {
     // io.emit('tellsEveryone', entry); replays to literally every socket
   });
 
-  socket.on('onLobby', () => {
-    socket.join('lobby');
-    console.log('socket.rooms: ', socket.rooms);
-  });
+  // socket.on('onLobby', (message, room) => {
+  //   if (room === '') {
+  //     socket.broadcast.emit('tellsEveryone', message);
+  //   } else {
+  //     socket.to(room).emit('tellsEveryone', message);
+  //   }
+  // });
 
+  socket.join('lobby');
+  console.log('socket.rooms: ', socket.rooms);
   // socket.join('lobby');
 
   socket.on('disconnect', () => {
