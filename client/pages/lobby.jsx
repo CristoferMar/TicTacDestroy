@@ -79,7 +79,7 @@ export default class Lobby extends React.Component {
   handleSubmit() {
     event.preventDefault();
     const { socket } = this.state;
-    console.log('socket.room:', socket.room);
+    console.log('socket.rooms:', socket.rooms);
     socket.emit('messageFromClient', this.state.basketball);
     this.setState({ basketball: '' });
     event.target[0].value = '';
