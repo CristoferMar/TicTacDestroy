@@ -22,14 +22,16 @@ export default class Lobby extends React.Component {
   }
 
   componentDidMount() {
-    console.log('this.context', this.context.socket);
     // const socket = io('http://localhost:2220');
     const { socket } = this.context;
     this.setState({ socket: socket });
-    // socket.on('connect', () => {
-    //   console.log('this.socket.id:', socket.id);
-    //   // socket.join('join lobby');
-    // });
+
+    console.log('this.socket.id:', socket.id);
+    // socket.join('lobby');
+
+    socket.emit('onLobby', () => {
+      socket.join('lobby');
+    });
 
     socket.on('tellsEveryone', entry => {
       console.log('Person says this:', entry);
@@ -76,8 +78,8 @@ export default class Lobby extends React.Component {
 
   handleSubmit() {
     event.preventDefault();
-    const { socket } = this;
-    console.log('socket.Id:', socket.id);
+    const { socket } = this.state;
+    console.log('socket.room:', socket.room);
     socket.emit('messageFromClient', this.state.basketball);
     this.setState({ basketball: '' });
     event.target[0].value = '';
