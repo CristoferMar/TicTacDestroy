@@ -20,17 +20,34 @@ const io = new Server(server, {
   }
 });
 
-io.on('connect', socket => {
+io.on('connection', socket => {
   console.log('made socket connection');
   console.log('this is the socket.id:', socket.id);
   // io.emit()
+  socket.on('join lobby', () => {
+    socket.join('lobby');
+    console.log('socket.rooms: ', socket.rooms);
+    console.log('io.sockets.adapter.rooms: ', io.sockets.adapter.rooms);
+  });
+  // console.log('socket.id:', socket.id);
+
   socket.on('messageFromClient', entry => {
     console.log('entry:', entry);
-
-    // io.emit('tellsEveryone', entry); replays to literally every socket
-
     socket.broadcast.emit('tellsEveryone', entry); // relays to everyone, except the sender
+  // io.emit('tellsEveryone', entry); replays to literally every socket
   });
+
+  // socket.on('onLobby', (message, room) => {
+  //   if (room === '') {
+  //     socket.broadcast.emit('tellsEveryone', message);
+  //   } else {
+  //     socket.to(room).emit('tellsEveryone', message);
+  //   }
+  // });
+
+  // socket.join('lobby');
+  // console.log('socket.rooms: ', socket.rooms);
+  // socket.join('lobby');
 
   socket.on('disconnect', () => {
     console.log('User d/c', socket.id);
@@ -100,7 +117,7 @@ app.get('/api/auth/sign-in', (req, res, next) => {
 
       argon2.verify(response.rows[0].hashedPassword, password)
         .then(matchTest => {
-          console.log('this is the response:', response);
+          // console.log('this is the response:', response);
           if (!matchTest) {
             throw new ClientError(401, 'invalid login');
           } else {
@@ -117,7 +134,7 @@ app.get('/api/auth/sign-in', (req, res, next) => {
 
 app.get('/api/openGames', (req, res, next) => {
   const sql = `
-  select "userId" as "player1", "userName" as "hostName", "gameId"
+  select "userId" as "player1", "userName" as "hostName", "gameId", "isActive"
   from "users"
   inner join "games" on "users"."userId" = "games"."player1"
   where "isActive" = $1
@@ -125,8 +142,31 @@ app.get('/api/openGames', (req, res, next) => {
   const params = [true];
   db.query(sql, params)
     .then(result => {
-      console.log(result);
+      // console.log(result);
       res.json(result.rows);
+    })
+    .catch(err => next(err));
+});
+
+app.post('/api/createGame', (req, res, next) => {
+  const { userId } = req.body;
+  // userId = parseInt(userId);
+  // console.log('********req:******', req);
+  // console.log('userId as num:', userId);
+  if (!userId) {
+    throw new ClientError(401, 'userId required');
+  }
+  const sql = `
+  insert into "games"("createdAt", "isActive", "player1")
+    values(now(), 'true', $1)
+    returning "gameId", "player1", "gameTime"
+  `;
+  const params = [userId];
+  db.query(sql, params)
+    .then(result => {
+      io.to('lobby').emit(result.rows[0]);
+      // console.log('**********NEW GAME result:*****************', result.rows[0]);
+      res.status(200).json(result.rows[0]);
     })
     .catch(err => next(err));
 });
