@@ -24,6 +24,7 @@ export default class App extends React.Component {
     window.addEventListener('hashchange', () => {
       this.setState({ route: parseRoute(window.location.hash) });
     });
+
     const { socket } = this;
     socket.on('connect', socket => {
       this.setState({ socketConnected: true });
@@ -49,6 +50,8 @@ export default class App extends React.Component {
   // go into a private room, put them in a private room
 
   render() {
+    const socketId = this.socket ? this.socket.id : 'nothing yet';
+    console.log('this.socket.id:', socketId);
     console.log('render has finished');
     const { path } = this.state.route;
     const background = path === 'Game-Page' ? 'shootingStarBackground' : 'blue-radial';
@@ -65,7 +68,7 @@ export default class App extends React.Component {
       );
     } else {
       return (
-        <div>loading....</div>
+        <div className='full-height white blue-radial'>connecting....</div>
       );
     }
   }

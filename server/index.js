@@ -30,11 +30,12 @@ io.on('connection', socket => {
     console.log('io.sockets.adapter.rooms: ', io.sockets.adapter.rooms);
   });
   // console.log('socket.id:', socket.id);
-  // socket.on('messageFromClient', entry => {
-  // console.log('entry:', entry);
-  // socket.broadcast.emit('tellsEveryone', entry); // relays to everyone, except the sender
+
+  socket.on('messageFromClient', entry => {
+    console.log('entry:', entry);
+    socket.broadcast.emit('tellsEveryone', entry); // relays to everyone, except the sender
   // io.emit('tellsEveryone', entry); replays to literally every socket
-  // });
+  });
 
   // socket.on('onLobby', (message, room) => {
   //   if (room === '') {
