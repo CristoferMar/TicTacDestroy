@@ -4,7 +4,7 @@ import NavBar from './pages/nav-bar';
 import Lobby from './pages/lobby';
 import Landing from './pages/landing';
 // import Home from './pages/home';
-import { io } from 'socket.io-client';
+// import { io } from 'socket.io-client';
 import AppContext from './lib/app-context';
 
 export default class App extends React.Component {
@@ -13,10 +13,10 @@ export default class App extends React.Component {
     this.state = {
       isAuthorizing: window.localStorage.getItem('tic-tac-destroy') === null,
       route: parseRoute(window.location.hash),
-      ioMessage: '',
-      socketConnected: false
+      ioMessage: ''
+      // socketConnected: false
     };
-    this.socket = io('http://localhost:2220');
+    // this.socket = io('http://localhost:2220');
     console.log('constructor has finished');
   }
 
@@ -25,10 +25,10 @@ export default class App extends React.Component {
       this.setState({ route: parseRoute(window.location.hash) });
     });
 
-    const { socket } = this;
-    socket.on('connect', socket => {
-      this.setState({ socketConnected: true });
-    });
+    // const { socket } = this;
+    // socket.on('connect', socket => {
+    //   this.setState({ socketConnected: true });
+    // });
   }
 
   renderPage(route) {
@@ -50,26 +50,20 @@ export default class App extends React.Component {
   // go into a private room, put them in a private room
 
   render() {
-    const socketId = this.socket ? this.socket.id : 'nothing yet';
-    console.log('this.socket.id:', socketId);
+    // const socketId = this.socket ? this.socket.id : 'nothing yet';
+    // console.log('this.socket.id:', socketId);
     console.log('render has finished');
     const { path } = this.state.route;
     const background = path === 'Game-Page' ? 'shootingStarBackground' : 'blue-radial';
-    const { socket } = this;
-    if (this.state.socketConnected) {
-      const contextValue = { name: 'daniel', age: 29, socket };
-      return (
+    // const { socket } = this;
+    const contextValue = { name: 'daniel', age: 29 };
+    return (
         <AppContext.Provider value={contextValue}>
           <div className={`full-height ${background}`}>
             <NavBar path={path} />
             {this.renderPage(this.state.route)}
           </div>
         </AppContext.Provider>
-      );
-    } else {
-      return (
-        <div className='full-height white blue-radial'>connecting....</div>
-      );
-    }
+    );
   }
 }

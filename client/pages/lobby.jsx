@@ -1,7 +1,7 @@
 import React from 'react';
 import LobbyGames from './lobby-games';
 import AppContext from '../lib/app-context';
-// import { io } from 'socket.io-client';
+import { io } from 'socket.io-client';
 
 // if user has a game that isActive with them being player1 in a lobby
 // redirect to game page **********REMEMBER TO DO THIS LOGIC WHEN WE HAVE A SIGN IN PAGE***********
@@ -14,8 +14,9 @@ export default class Lobby extends React.Component {
     this.state = {
       activeGames: [],
       basketball: '',
-      socket: {}
+      socketConnected: false
     };
+    this.socket = io('http://localhost:2220');
     this.handleNewGame = this.handleNewGame.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -23,15 +24,18 @@ export default class Lobby extends React.Component {
 
   componentDidMount() {
     // const socket = io('http://localhost:2220');
-    const { socket } = this.context;
-    this.setState({ socket: socket });
+
+    const { socket } = this;
+    socket.on('connect', socket => {
+      this.socket.emit('join lobby');
+      this.setState({ socketConnected: true });
+    });
 
     // socket.join('lobby');
 
     // socket.emit('onLobby', () => {
     //   socket.join('lobby');
     // });
-    socket.emit('join lobby');
 
     socket.on('tellsEveryone', entry => {
       console.log('Person says this:', entry);
@@ -53,6 +57,10 @@ export default class Lobby extends React.Component {
         console.error(err);
       });
     console.log('Did the page load already?');
+  }
+
+  componentWillUnmount() {
+    this.socket.disconnect();
   }
 
   handleNewGame() {
@@ -78,9 +86,9 @@ export default class Lobby extends React.Component {
 
   handleSubmit() {
     event.preventDefault();
-    const { socket } = this.state;
-    console.log('socket.rooms:', socket.rooms);
-    socket.emit('messageFromClient', this.state.basketball);
+    // const { socket } = this.state;
+    console.log('socket.rooms:', this.socket.rooms);
+    this.socket.emit('messageFromClient', this.state.basketball);
     this.setState({ basketball: '' });
     event.target[0].value = '';
   }
@@ -91,8 +99,11 @@ export default class Lobby extends React.Component {
   }
 
   render() {
+    const socketId = this.socket ? this.socket.id : 'nothing yet';
+    console.log('this.socket.id:', socketId);
     // console.log('this.context:', this.context);
-    return (
+    if (this.state.socketConnected) {
+      return (
       <div className="full-width height-min-nav center-all">
         <div>
             <form onSubmit={this.handleSubmit}>
@@ -142,7 +153,12 @@ export default class Lobby extends React.Component {
         </div>
        </div>
       </div>
-    );
+      );
+    } else {
+      return (
+        <div className='full-height white blue-radial'>connecting....</div>
+      );
+    }
   }
 }
 
