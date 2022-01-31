@@ -29,9 +29,10 @@ export default class Lobby extends React.Component {
     console.log('this.socket.id:', socket.id);
     // socket.join('lobby');
 
-    socket.emit('onLobby', () => {
-      socket.join('lobby');
-    });
+    // socket.emit('onLobby', () => {
+    //   socket.join('lobby');
+    // });
+    socket.emit('join lobby');
 
     socket.on('tellsEveryone', entry => {
       console.log('Person says this:', entry);
