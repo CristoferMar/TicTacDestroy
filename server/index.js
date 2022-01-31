@@ -24,13 +24,17 @@ io.on('connection', socket => {
   console.log('made socket connection');
   console.log('this is the socket.id:', socket.id);
   // io.emit()
-
-  // console.log('socket.id:', socket.id);
-  socket.on('messageFromClient', entry => {
-    // console.log('entry:', entry);
-    socket.broadcast.emit('tellsEveryone', entry); // relays to everyone, except the sender
-    // io.emit('tellsEveryone', entry); replays to literally every socket
+  socket.on('join lobby', () => {
+    socket.join('lobby');
+    console.log('socket.rooms: ', socket.rooms);
+    console.log('io.sockets.adapter.rooms: ', io.sockets.adapter.rooms);
   });
+  // console.log('socket.id:', socket.id);
+  // socket.on('messageFromClient', entry => {
+  // console.log('entry:', entry);
+  // socket.broadcast.emit('tellsEveryone', entry); // relays to everyone, except the sender
+  // io.emit('tellsEveryone', entry); replays to literally every socket
+  // });
 
   // socket.on('onLobby', (message, room) => {
   //   if (room === '') {
@@ -40,8 +44,8 @@ io.on('connection', socket => {
   //   }
   // });
 
-  socket.join('lobby');
-  console.log('socket.rooms: ', socket.rooms);
+  // socket.join('lobby');
+  // console.log('socket.rooms: ', socket.rooms);
   // socket.join('lobby');
 
   socket.on('disconnect', () => {
