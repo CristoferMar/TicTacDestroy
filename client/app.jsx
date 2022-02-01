@@ -5,6 +5,7 @@ import Lobby from './pages/lobby';
 import Landing from './pages/landing';
 // import Home from './pages/home';
 // import { io } from 'socket.io-client';
+import SignOn from './pages/sign-on';
 import AppContext from './lib/app-context';
 
 export default class App extends React.Component {
@@ -39,6 +40,9 @@ export default class App extends React.Component {
     }
     if (path === 'Lobby') {
       return <Lobby />;
+    }
+    if (path === 'Sign-Up' || path === 'Sign-In') {
+      return <SignOn />;
     }
 
     console.log('componentDidMount has finished');

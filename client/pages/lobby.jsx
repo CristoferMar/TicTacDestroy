@@ -72,7 +72,7 @@ export default class Lobby extends React.Component {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        userId: 3
+        userId: 2
       })
     };
     fetch('/api/createGame', req)
