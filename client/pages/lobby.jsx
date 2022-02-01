@@ -25,6 +25,15 @@ export default class Lobby extends React.Component {
   componentDidMount() {
     // const socket = io('http://localhost:2220');
 
+    fetch('/api/openGames')
+      .then(response => response.json())
+      .then(result => {
+        this.setState({ activeGames: result });
+      })
+      .catch(err => {
+        console.error(err);
+      });
+
     const { socket } = this;
     socket.on('connect', socket => {
       this.socket.emit('join lobby');
@@ -43,20 +52,11 @@ export default class Lobby extends React.Component {
 
     socket.on('newGameCreated', entry => {
       console.log('NEW GAME CREATED:', entry);
-      console.log('this.state.activeGames: ', this.state.activeGames);
-      // this.setState({ activeGames: this.state.activeGames.push(entry) });
+      const openedGames = this.state.activeGames;
+      openedGames.push(entry);
+      this.setState({ activeGames: openedGames });
     });
 
-    // socket.emit('join lobby');
-
-    fetch('/api/openGames')
-      .then(response => response.json())
-      .then(result => {
-        this.setState({ activeGames: result });
-      })
-      .catch(err => {
-        console.error(err);
-      });
     console.log('Did the page load already?');
   }
 
@@ -72,7 +72,7 @@ export default class Lobby extends React.Component {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        userId: 2
+        userId: 3
       })
     };
     fetch('/api/createGame', req)

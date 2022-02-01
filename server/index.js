@@ -161,14 +161,19 @@ app.post('/api/createGame', (req, res, next) => {
     throw new ClientError(401, 'userId required');
   }
   const sql = `
-  insert into "games"("createdAt", "isActive", "player1")
-    values(now(), 'true', $1)
-    returning "gameId", "player1", "gameTime"
+  with "insertedGame" as (
+    insert into "games"("createdAt", "isActive", "player1")
+      values(now(), 'true', $1)
+      returning "gameId", "player1", "gameTime", "isActive"
+  )
+  select "u"."userId" as "player1", "u"."userName" as "hostName", "i"."gameId", "i"."isActive"
+    from "users" as "u"
+    join "insertedGame" as "i" on "u"."userId" = "i"."player1"
   `;
   const params = [userId];
   db.query(sql, params)
     .then(result => {
-      io.to('lobby').emit(result.rows[0]);
+      // io.to('lobby').emit(result.rows[0]);
       // console.log('**********NEW GAME result:*****************', result.rows[0]);
       res.status(200).json(result.rows[0]);
     })
