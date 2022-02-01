@@ -31,7 +31,7 @@ io.on('connection', socket => {
   });
 
   socket.on('new game', entry => {
-    socket.broadcast.emit('newGameCreated', entry);
+    socket.to('lobby').emit('newGameCreated', entry);
   });
   // console.log('socket.id:', socket.id);
 

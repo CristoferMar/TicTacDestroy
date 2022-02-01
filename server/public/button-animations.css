@@ -38,6 +38,11 @@ we need to match the width and height on lines 6/7 & 23/24 */
   content: "Sign In";
 }
 
+.sign-up-content::before,
+.sign-up-content::after {
+  content: "Sign Up";
+}
+
 .play-as-guest::before,
 .play-as-guest::after {
   content: "Play as Guest";

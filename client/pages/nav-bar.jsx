@@ -28,7 +28,11 @@ export default class NavBar extends React.Component {
               : <img src="/images/small-logo.svg" alt="TicTacDestroy" className="height-70-90" />
           }
           <div className="flex-between">
-            <span className="nav-buttons"><a href="#Sign-In" className="nav-buttons-link sign-in-content"></a></span>
+            {
+            path === 'Sign-Up'
+              ? <span className="nav-buttons"><a href="#Sign-In" className="nav-buttons-link sign-in-content"></a></span>
+              : <span className="nav-buttons"><a href="#Sign-Up" className="nav-buttons-link sign-up-content"></a></span>
+            }
             <span className="nav-buttons wide-button"><a href="#Lobby" className="nav-buttons-link play-as-guest"></a></span>
           </div>
         </>
