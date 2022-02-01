@@ -43,6 +43,7 @@ export default class Lobby extends React.Component {
 
     socket.on('newGameCreated', entry => {
       console.log('NEW GAME CREATED:', entry);
+      console.log('this.state.activeGames: ', this.state.activeGames);
       // this.setState({ activeGames: this.state.activeGames.push(entry) });
     });
 
@@ -71,12 +72,13 @@ export default class Lobby extends React.Component {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        userId: 1
+        userId: 2
       })
     };
     fetch('/api/createGame', req)
       .then(response => response.json())
       .then(result => {
+        this.socket.emit('new game', result);
         console.log(result);
       })
       .catch(err => {

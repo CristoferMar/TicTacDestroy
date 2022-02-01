@@ -29,6 +29,10 @@ io.on('connection', socket => {
     console.log('socket.rooms: ', socket.rooms);
     console.log('io.sockets.adapter.rooms: ', io.sockets.adapter.rooms);
   });
+
+  socket.on('new game', entry => {
+    socket.broadcast.emit('newGameCreated', entry);
+  });
   // console.log('socket.id:', socket.id);
 
   socket.on('messageFromClient', entry => {
@@ -136,7 +140,7 @@ app.get('/api/openGames', (req, res, next) => {
   const sql = `
   select "userId" as "player1", "userName" as "hostName", "gameId", "isActive"
   from "users"
-  inner join "games" on "users"."userId" = "games"."player1"
+  join "games" on "users"."userId" = "games"."player1"
   where "isActive" = $1
   `;
   const params = [true];
