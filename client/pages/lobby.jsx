@@ -106,55 +106,55 @@ export default class Lobby extends React.Component {
     // console.log('this.context:', this.context);
     if (this.state.socketConnected) {
       return (
-      <div className="full-width height-min-nav center-all">
-        <div>
+        <div className="full-width height-min-nav center-all">
+          <div>
             <form onSubmit={this.handleSubmit}>
               <input type="text" onChange={this.handleChange} placeholder="type here..." name="basketball"></input>
               <button>push me</button>
             </form>
             {this.state.ioMessage}
           </div>
-       <div className="border flex align-center column">
-        <div className="custom-heading-1">
-          <span className="green">Game</span> <span className="pink">Lobby</span>
-        </div>
-
-        <div className="full-width flex-evenly">
-          <div className='fixed-width'>
-            <h2 className="white mt-0">Host</h2>
-          </div>
-          <div className='fixed-width'>
-            <h2 className="white mt-0">Players</h2>
-          </div>
-        </div>
-
-        <div className="overflow full-width">
-          {this.state.activeGames.map(game =>
-            <div className="full-width flex-evenly" key={game.gameId} id={game.gameId}>
-              <LobbyGames player1={game.player1} hostName={game.hostName} isActive={game.isActive} />
+          <div className="border flex align-center column">
+            <div className="custom-heading-1">
+              <span className="green">Game</span> <span className="pink">Lobby</span>
             </div>
-          )
-          }
-        </div>
 
-        <div className="full-width padding-3-rem green flex-evenly">
-            <div className="buttons" onClick={this.handleNewGame}>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            Create Game
-          </div>
-          <div className="buttons">
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            Join Game
+            <div className="full-width flex-evenly">
+              <div className='fixed-width'>
+                <h2 className="white mt-0">Host</h2>
+              </div>
+              <div className='fixed-width'>
+                <h2 className="white mt-0">Players</h2>
+              </div>
+            </div>
+
+            <div className="overflow full-width">
+              {this.state.activeGames.map(game =>
+                <div className="full-width flex-evenly" key={game.gameId} id={game.gameId}>
+                  <LobbyGames player1={game.player1} hostName={game.hostName} isActive={game.isActive} />
+                </div>
+              )
+              }
+            </div>
+
+            <div className="full-width padding-3-rem green flex-evenly">
+              <div className="buttons" onClick={this.handleNewGame}>
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                Create Game
+              </div>
+              <div className="buttons">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                Join Game
+              </div>
+            </div>
           </div>
         </div>
-       </div>
-      </div>
       );
     } else {
       return (

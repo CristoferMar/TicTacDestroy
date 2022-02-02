@@ -23,6 +23,10 @@
   width: 100%;
 }
 
+.height-40 {
+  height: 40px;
+}
+
 .column {
   flex-direction: column;
 }
@@ -30,6 +34,18 @@
 .flex-between {
   display: flex;
   justify-content: space-between;
+}
+
+.br-12 {
+  border-radius: 12px;
+}
+
+.pl-10 {
+  padding-left: 10px;
+}
+
+.ml-10 {
+  margin-left: 10px;
 }
 
 .flex-around {
@@ -58,6 +74,14 @@
 
 .pink {
   color: #cd1ccc;
+}
+
+.mt-20 {
+  margin-top: 20px;
+}
+
+.mb-10 {
+  margin-bottom: 10px;
 }
 
 .white {
