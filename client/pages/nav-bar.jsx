@@ -29,7 +29,7 @@ export default class NavBar extends React.Component {
           }
           <div className="flex-between">
             {
-            path === 'Sign-Up'
+            (path === 'Sign-Up' || path === '')
               ? <span className="nav-buttons"><a href="#Sign-In" className="nav-buttons-link sign-in-content"></a></span>
               : <span className="nav-buttons"><a href="#Sign-Up" className="nav-buttons-link sign-up-content"></a></span>
             }

@@ -1,9 +1,3 @@
-th,
-td {
-  /* border: solid 1px white; */
-  padding: 10px 50px;
-}
-
 .nav-buttons,
 .nav-buttons-link,
 .nav-buttons-link::before,
@@ -39,10 +33,6 @@ td {
 
 .height-75-90 {
   height: 90vh;
-}
-
-.height-160-300 {
-  height: 160px;
 }
 
 .height-70-90 {
@@ -83,12 +73,6 @@ td {
 }
 
 @media screen and (min-width: 625px) {
-  th,
-  td {
-    /* border: solid 1px white; */
-    padding: 10px 80px;
-  }
-
   .nav-buttons,
   .nav-buttons-link,
   .nav-buttons-link::before,
@@ -120,10 +104,6 @@ td {
 
   .height-75-90 {
     height: 75vh;
-  }
-
-  .height-160-300 {
-    height: 300px;
   }
 
   .height-70-90 {

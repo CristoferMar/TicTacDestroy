@@ -293,6 +293,13 @@ we need to match the width and height on lines 6/7 & 23/24 */
   }
 }
 
+.roboto-fixed-size {
+  font-family: Roboto, sans-serif;
+  font-size: 0.9rem;
+  width: 81px;
+  height: 30px;
+}
+
 /* THIS IS THE CIRCLE COUNT-DOWN ANNIMATION (PIE) */
 
 /* INSERT INTO REACT WITH THE FOLLOWING HTML
