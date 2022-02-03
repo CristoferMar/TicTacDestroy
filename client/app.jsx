@@ -14,11 +14,13 @@ export default class App extends React.Component {
     this.state = {
       isAuthorizing: window.localStorage.getItem('tic-tac-destroy') === null,
       route: parseRoute(window.location.hash),
-      ioMessage: ''
+      ioMessage: '',
+      userInfo: JSON.parse(window.localStorage.getItem('TTD-JWT'))
       // socketConnected: false
     };
     // this.socket = io('http://localhost:2220');
     console.log('constructor has finished');
+    this.handleSignIn = this.handleSignIn.bind(this);
   }
 
   componentDidMount() {
@@ -32,6 +34,10 @@ export default class App extends React.Component {
     // });
   }
 
+  handleSignIn() {
+    this.setState({ userInfo: JSON.parse(window.localStorage.getItem('TTD-JWT')) });
+  }
+
   renderPage(route) {
     const { path } = route;
 
@@ -42,7 +48,7 @@ export default class App extends React.Component {
       return <Lobby />;
     }
     if (path === 'Sign-Up' || path === 'Sign-In') {
-      return <SignOn />;
+      return <SignOn signInHandler={this.handleSignIn} />;
     }
 
     console.log('componentDidMount has finished');
