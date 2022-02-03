@@ -90,6 +90,7 @@ app.post('/api/auth/sign-up', (req, res, next) => {
       db.query(sql, params)
         .then(result => {
           if (result.rows[0]) {
+            console.log('result.rows[0]:', result.rows[0]);
             res.status(201).json(result.rows[0]);
           } else {
             throw new ClientError(409, 'This user name is already taken.');
@@ -100,7 +101,7 @@ app.post('/api/auth/sign-up', (req, res, next) => {
     .catch(err => next(err));
 });
 
-app.get('/api/auth/sign-in', (req, res, next) => {
+app.post('/api/auth/sign-in', (req, res, next) => {
   const { username, password } = req.body;
   if (!username || !password) {
     throw new ClientError(400, 'Username and password are required fields.');
