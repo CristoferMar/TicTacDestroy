@@ -17,10 +17,10 @@ export default class SignOn extends React.Component {
           {
             path === '#Sign-In'
               ? <>
-                  <span className="green">Sign</span><span className="pink">-In</span>
+                  <span className="green">Sign</span><span className="pink"> In</span>
                 </>
               : <>
-                  <span className="green">Sign</span> <span className="pink">Up</span>
+                  <span className="green">Sign</span><span className="pink"> Up</span>
                 </>
           }
         </div>
@@ -32,14 +32,17 @@ export default class SignOn extends React.Component {
             <input type="password" placeholder="Enter your password" id="password" className="height-40 br-12 pl-10"></input>
           </form>
         </div>
-
-        <div className="full-width padding-3-rem green flex-evenly">
-          <div className="buttons" onClick={this.handleNewGame}>
+        <div className="full-width padding-3-rem green center-all">
+          <div className="register roboto-fixed-size click" onClick={this.handleNewGame}>
             <span></span>
             <span></span>
             <span></span>
             <span></span>
-            Sign-up
+            {
+              path === '#Sign-In'
+                ? 'Sign In'
+                : 'Sign Up'
+            }
           </div>
         </div>
       </div>

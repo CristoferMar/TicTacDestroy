@@ -1,3 +1,7 @@
+.click {
+  cursor: pointer;
+}
+
 .full-height {
   height: 100vh;
 }
@@ -87,6 +91,11 @@
 .white {
   color: #e6efff;
   font-family: Roboto, sans-serif;
+}
+
+.large-logo-95 {
+  width: 95%;
+  max-width: 671px;
 }
 
 .overflow {
