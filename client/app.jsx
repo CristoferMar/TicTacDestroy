@@ -12,10 +12,9 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isAuthorizing: window.localStorage.getItem('tic-tac-destroy') === null,
+      token: window.localStorage.getItem('TTD-JWT'),
       route: parseRoute(window.location.hash),
-      ioMessage: '',
-      userInfo: JSON.parse(window.localStorage.getItem('TTD-JWT'))
+      ioMessage: ''
       // socketConnected: false
     };
     // this.socket = io('http://localhost:2220');
@@ -35,14 +34,23 @@ export default class App extends React.Component {
   }
 
   handleSignIn() {
-    this.setState({ userInfo: JSON.parse(window.localStorage.getItem('TTD-JWT')) });
+    window.location.hash = '#Lobby';
+    this.setState({
+      token: JSON.parse(window.localStorage.getItem('TTD-JWT')),
+      route: parseRoute(window.location.hash)
+    });
   }
 
   renderPage(route) {
+
     const { path } = route;
 
     if (path === 'Landing-Page' || path === '') {
-      return <Landing />;
+      if (this.state.token) {
+        window.location.hash = '#Lobby';
+      } else {
+        return <Landing />;
+      }
     }
     if (path === 'Lobby') {
       return <Lobby />;
