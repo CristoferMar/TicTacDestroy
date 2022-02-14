@@ -1,8 +1,19 @@
 import React from 'react';
 
 export default class NavBar extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+
+    this.handleSignOut = this.handleSignOut.bind(this);
+  }
+
+  handleSignOut() {
+    this.props.signOutHandler();
+  }
 
   render() {
+    console.log('this.props: ', this.props);
     const path = this.props.path;
     const single = ['Lobby', 'Results'].includes(path);
     const signOn = ['Sign-Up', 'Sign-In', 'Landing-Page', ''].includes(path);
@@ -15,7 +26,7 @@ export default class NavBar extends React.Component {
           <>
             <img src="/images/small-logo.svg" alt="TicTacDestroy" className="height-70-90" />
             <div className="flex-between">
-              <span className="nav-buttons"><a href="#Sign-In" className="nav-buttons-link sign-out-content"></a></span>
+              <span className="nav-buttons"><a onClick={this.handleSignOut} className="nav-buttons-link sign-out-content"></a></span>
             </div>
           </>
         }
