@@ -5,19 +5,21 @@ import Lobby from './pages/lobby';
 import Landing from './pages/landing';
 // import Home from './pages/home';
 // import { io } from 'socket.io-client';
+import SignOn from './pages/sign-on';
 import AppContext from './lib/app-context';
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isAuthorizing: window.localStorage.getItem('tic-tac-destroy') === null,
+      token: window.localStorage.getItem('TTD-JWT'),
       route: parseRoute(window.location.hash),
       ioMessage: ''
       // socketConnected: false
     };
     // this.socket = io('http://localhost:2220');
     console.log('constructor has finished');
+    this.handleSignIn = this.handleSignIn.bind(this);
   }
 
   componentDidMount() {
@@ -31,14 +33,30 @@ export default class App extends React.Component {
     // });
   }
 
+  handleSignIn() {
+    window.location.hash = '#Lobby';
+    this.setState({
+      token: JSON.parse(window.localStorage.getItem('TTD-JWT')),
+      route: parseRoute(window.location.hash)
+    });
+  }
+
   renderPage(route) {
+
     const { path } = route;
 
     if (path === 'Landing-Page' || path === '') {
-      return <Landing />;
+      if (this.state.token) {
+        window.location.hash = '#Lobby';
+      } else {
+        return <Landing />;
+      }
     }
     if (path === 'Lobby') {
       return <Lobby />;
+    }
+    if (path === 'Sign-Up' || path === 'Sign-In') {
+      return <SignOn signInHandler={this.handleSignIn} />;
     }
 
     console.log('componentDidMount has finished');

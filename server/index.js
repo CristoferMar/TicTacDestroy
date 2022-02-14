@@ -31,7 +31,7 @@ io.on('connection', socket => {
   });
 
   socket.on('new game', entry => {
-    socket.broadcast.emit('newGameCreated', entry);
+    socket.to('lobby').emit('newGameCreated', entry);
   });
   // console.log('socket.id:', socket.id);
 
@@ -90,6 +90,7 @@ app.post('/api/auth/sign-up', (req, res, next) => {
       db.query(sql, params)
         .then(result => {
           if (result.rows[0]) {
+            console.log('result.rows[0]:', result.rows[0]);
             res.status(201).json(result.rows[0]);
           } else {
             throw new ClientError(409, 'This user name is already taken.');
@@ -100,7 +101,7 @@ app.post('/api/auth/sign-up', (req, res, next) => {
     .catch(err => next(err));
 });
 
-app.get('/api/auth/sign-in', (req, res, next) => {
+app.post('/api/auth/sign-in', (req, res, next) => {
   const { username, password } = req.body;
   if (!username || !password) {
     throw new ClientError(400, 'Username and password are required fields.');
@@ -161,14 +162,19 @@ app.post('/api/createGame', (req, res, next) => {
     throw new ClientError(401, 'userId required');
   }
   const sql = `
-  insert into "games"("createdAt", "isActive", "player1")
-    values(now(), 'true', $1)
-    returning "gameId", "player1", "gameTime"
+  with "insertedGame" as (
+    insert into "games"("createdAt", "isActive", "player1")
+      values(now(), 'true', $1)
+      returning "gameId", "player1", "gameTime", "isActive"
+  )
+  select "u"."userId" as "player1", "u"."userName" as "hostName", "i"."gameId", "i"."isActive"
+    from "users" as "u"
+    join "insertedGame" as "i" on "u"."userId" = "i"."player1"
   `;
   const params = [userId];
   db.query(sql, params)
     .then(result => {
-      io.to('lobby').emit(result.rows[0]);
+      // io.to('lobby').emit(result.rows[0]);
       // console.log('**********NEW GAME result:*****************', result.rows[0]);
       res.status(200).json(result.rows[0]);
     })
