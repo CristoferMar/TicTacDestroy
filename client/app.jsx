@@ -34,29 +34,34 @@ export default class App extends React.Component {
   }
 
   handleSignIn() {
+    console.log('handleSignIn has run from app.jsx');
+
+    // window.location.hash = '#Lobby';
+    this.setState({ token: JSON.parse(window.localStorage.getItem('TTD-JWT')) });
     window.location.hash = '#Lobby';
-    this.setState({
-      token: JSON.parse(window.localStorage.getItem('TTD-JWT')),
-      route: parseRoute(window.location.hash)
-    });
   }
 
-  renderPage(route) {
+  renderPage() {
 
+    const { token, route } = this.state;
     const { path } = route;
+    console.log('token:', token);
+    console.log('path:', path);
 
-    if (path === 'Landing-Page' || path === '') {
-      if (this.state.token) {
-        window.location.hash = '#Lobby';
+    if (!token) {
+      if (path === 'Landing-Page' || path === '') {
+        return <Landing />;
+      } else if (path === 'Sign-Up' || path === 'Sign-In') {
+        return <SignOn signInHandler={this.handleSignIn} />;
       } else {
+        window.location.hash = '';
         return <Landing />;
       }
-    }
-    if (path === 'Lobby') {
-      return <Lobby />;
-    }
-    if (path === 'Sign-Up' || path === 'Sign-In') {
-      return <SignOn signInHandler={this.handleSignIn} />;
+    } else {
+      if (path === 'Lobby') {
+        return <Lobby />;
+      }
+
     }
 
     console.log('componentDidMount has finished');
@@ -79,7 +84,9 @@ export default class App extends React.Component {
         <AppContext.Provider value={contextValue}>
           <div className={`full-height ${background}`}>
             <NavBar path={path} />
-            {this.renderPage(this.state.route)}
+            {this.renderPage()}
+
+            {/* {this.renderPage(this.state.route)} */}
           </div>
         </AppContext.Provider>
     );

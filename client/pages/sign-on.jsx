@@ -62,6 +62,8 @@ export default class SignOn extends React.Component {
             this.handleSignIn();
           }
         });
+    } else {
+      this.handleSignIn();
     }
 
   }
