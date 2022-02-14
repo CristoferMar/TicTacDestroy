@@ -55,8 +55,12 @@ export default class SignOn extends React.Component {
       fetch('/api/auth/sign-up', req)
         .then(response => response.json())
         .then(result => {
-          console.log('did this run line 58');
-          this.handleSignIn();
+          console.log('result:', result);
+          if (result.error) {
+            alert('username is taken');
+          } else {
+            this.handleSignIn();
+          }
         });
     }
 
@@ -81,9 +85,9 @@ export default class SignOn extends React.Component {
         <div className="width-90">
           <form action="" onSubmit={this.handleSubmit} className="full-width flex column justify-center padding-10">
             <label htmlFor="name" className="white ml-10 mb-10">Name*</label>
-            <input type="text" placeholder="Enter your username" id="name" onChange={this.handleChange} className="height-40 br-12 pl-10"></input>
+            <input type="text" placeholder="Enter your username" maxLength="30" id="name" required onChange={this.handleChange} className="height-40 br-12 pl-10"></input>
             <label htmlFor="password" className="white ml-10 mt-20 mb-10">Password*</label>
-            <input type="password" placeholder="Enter your password" id="password" onChange={this.handleChange} className="height-40 br-12 pl-10"></input>
+            <input type="password" placeholder="Enter your password" maxLength="30" id="password" required onChange={this.handleChange} className="height-40 br-12 pl-10"></input>
             <div className="full-width padding-3-rem green center-all">
               <button className="transparent-button">
                 <div className="register roboto-fixed-size click">
