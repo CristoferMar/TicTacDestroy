@@ -6,12 +6,14 @@ export default class SignOn extends React.Component {
     this.state = {
       name: '',
       password: '',
-      failedVerify: false
+      failedVerify: false,
+      newUser: window.location.hash === '#Sign-Up',
+      loggingIn: window.location.hash === '#Sign-In'
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleSignIn = this.handleSignIn.bind(this);
-    this.handleBadVerify = this.handleBadVerify.bind(this);
+    // this.handleBadVerify = this.handleBadVerify.bind(this);
   }
 
   handleChange() {
@@ -37,6 +39,9 @@ export default class SignOn extends React.Component {
         if (result.error) {
           // alert('UserName or Password is incorrect');
           this.setState({ password: '', failedVerify: true });
+          setTimeout(() => {
+            this.setState({ failedVerify: false });
+          }, 500);
         } else {
           window.localStorage.setItem('TTD-JWT', JSON.stringify(result));
           this.props.signInHandler();
@@ -74,15 +79,15 @@ export default class SignOn extends React.Component {
     }
   }
 
-  handleBadVerify() {
-    setTimeout(() => {
-      this.setState({ failedVerify: false });
-    }, 500);
-  }
+  // handleBadVerify() {
+  //   setTimeout(() => {
+  //     this.setState({ failedVerify: false });
+  //   }, 500);
+  // }
 
   render() {
     const failed = this.state.failedVerify === true;
-    if (failed) this.handleBadVerify();
+    const shake = failed ? 'shake' : '';
     const path = window.location.hash;
     return (
       <div className="full-width height-min-nav center-all">
@@ -101,9 +106,9 @@ export default class SignOn extends React.Component {
           <div className="width-90">
             <form action="" onSubmit={this.handleSubmit} className="full-width flex column justify-center padding-10">
               <label htmlFor="name" className="white ml-10 mb-10">Name*</label>
-              <input type="text" placeholder="Enter your username" maxLength="30" id="name" required onChange={this.handleChange} className="height-40 br-12 pl-10"></input>
+              <input type="text" placeholder="Enter your username" maxLength="30" id="name" value={this.state.name} required onChange={this.handleChange} className="height-40 br-12 pl-10"></input>
               <label htmlFor="password" className="white ml-10 mt-20 mb-10">Password*</label>
-              <input type="password" placeholder="Enter your password" maxLength="30" id="password" required onChange={this.handleChange} className={`height-40 br-12 pl-10 ${failed ? 'shake' : ''}`}></input>
+              <input type="password" placeholder="Enter your password" maxLength="30" id="password" value={this.state.password} required onChange={this.handleChange} className={`height-40 br-12 pl-10 ${shake}`}></input>
               <div className="full-width padding-3-rem green center-all">
                 <button className="transparent-button">
                   <div className="register roboto-fixed-size click">
