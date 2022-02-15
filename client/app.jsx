@@ -18,8 +18,9 @@ export default class App extends React.Component {
       // socketConnected: false
     };
     // this.socket = io('http://localhost:2220');
-    console.log('constructor has finished');
+    // console.log('constructor has finished');
     this.handleSignIn = this.handleSignIn.bind(this);
+    this.handleSignOut = this.handleSignOut.bind(this);
   }
 
   componentDidMount() {
@@ -39,6 +40,11 @@ export default class App extends React.Component {
     // window.location.hash = '#Lobby';
     this.setState({ token: JSON.parse(window.localStorage.getItem('TTD-JWT')) });
     window.location.hash = '#Lobby';
+  }
+
+  handleSignOut() {
+    window.localStorage.removeItem('TTD-JWT');
+    this.setState({ token: null });
   }
 
   renderPage() {
@@ -83,7 +89,7 @@ export default class App extends React.Component {
     return (
         <AppContext.Provider value={contextValue}>
           <div className={`full-height ${background}`}>
-            <NavBar path={path} />
+            <NavBar path={path} signOutHandler={this.handleSignOut} />
             {this.renderPage()}
 
             {/* {this.renderPage(this.state.route)} */}
