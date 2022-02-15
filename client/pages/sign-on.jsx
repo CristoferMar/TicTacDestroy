@@ -7,8 +7,8 @@ export default class SignOn extends React.Component {
       name: '',
       password: '',
       failedVerify: false,
-      newUser: window.location.hash === '#Sign-Up',
-      loggingIn: window.location.hash === '#Sign-In'
+      loggingIn: window.location.hash === '#Sign-In',
+      tryAgain: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -22,7 +22,7 @@ export default class SignOn extends React.Component {
   }
 
   handleSignIn() {
-    console.log('handleSignIn has RUNN');
+    console.log('handleSignIn has RUN');
     const req = {
       method: 'POST',
       headers: {
@@ -38,7 +38,7 @@ export default class SignOn extends React.Component {
       .then(result => {
         if (result.error) {
           // alert('UserName or Password is incorrect');
-          this.setState({ password: '', failedVerify: true });
+          this.setState({ password: '', failedVerify: true, tryAgain: true });
           setTimeout(() => {
             this.setState({ failedVerify: false });
           }, 500);
@@ -69,7 +69,10 @@ export default class SignOn extends React.Component {
         .then(result => {
           console.log('result:', result);
           if (result.error) {
-            alert('username is taken');
+            this.setState({ password: '', failedVerify: true, tryAgain: true });
+            setTimeout(() => {
+              this.setState({ failedVerify: false });
+            }, 500);
           } else {
             this.handleSignIn();
           }
@@ -89,6 +92,7 @@ export default class SignOn extends React.Component {
     const failed = this.state.failedVerify === true;
     const shake = failed ? 'shake' : '';
     const path = window.location.hash;
+    const errorMessage = this.state.loggingIn ? '⚠ Invalid credentials' : 'Username may be taken';
     return (
       <div className="full-width height-min-nav center-all">
         <div className="border flex align-center column">
@@ -109,6 +113,8 @@ export default class SignOn extends React.Component {
               <input type="text" placeholder="Enter your username" maxLength="30" id="name" value={this.state.name} required onChange={this.handleChange} className="height-40 br-12 pl-10"></input>
               <label htmlFor="password" className="white ml-10 mt-20 mb-10">Password*</label>
               <input type="password" placeholder="Enter your password" maxLength="30" id="password" value={this.state.password} required onChange={this.handleChange} className={`height-40 br-12 pl-10 ${shake}`}></input>
+              {this.state.tryAgain &&
+                <p className="white">{errorMessage}</p>}
               <div className="full-width padding-3-rem green center-all">
                 <button className="transparent-button">
                   <div className="register roboto-fixed-size click">
