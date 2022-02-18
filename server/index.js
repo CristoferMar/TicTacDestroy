@@ -73,7 +73,7 @@ app.post('/api/auth/sign-up', (req, res, next) => {
 
   const { username, password } = req.body;
   if (!username || !password) {
-    throw new ClientError(400, 'Username and password are required fields.');
+    throw new ClientError(400, 'Username and password are required fields');
   }
 
   argon2.hash(password)
@@ -93,7 +93,7 @@ app.post('/api/auth/sign-up', (req, res, next) => {
             console.log('result.rows[0]:', result.rows[0]);
             res.status(201).json(result.rows[0]);
           } else {
-            throw new ClientError(409, 'This user name is already taken.');
+            throw new ClientError(409, 'This user name is already taken');
           }
         })
         .catch(err => next(err));
@@ -104,7 +104,7 @@ app.post('/api/auth/sign-up', (req, res, next) => {
 app.post('/api/auth/sign-in', (req, res, next) => {
   const { username, password } = req.body;
   if (!username || !password) {
-    throw new ClientError(400, 'Username and password are required fields.');
+    throw new ClientError(400, 'Username and password are required fields');
   }
 
   const sql = `
@@ -117,14 +117,14 @@ app.post('/api/auth/sign-in', (req, res, next) => {
   db.query(sql, params)
     .then(response => {
       if (response.rowCount < 1) {
-        throw new ClientError(401, 'invalid login');
+        throw new ClientError(401, 'Invalid login credentials');
       }
 
       argon2.verify(response.rows[0].hashedPassword, password)
         .then(matchTest => {
           // console.log('this is the response:', response);
           if (!matchTest) {
-            throw new ClientError(401, 'invalid login');
+            throw new ClientError(401, 'Invalid login credentials');
           } else {
             const payload = { userId: response.rows[0].userId, username: username };
             const token = jwt.sign(payload, process.env.TOKEN_SECRET);
