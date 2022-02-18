@@ -8,13 +8,30 @@ export default class SignOn extends React.Component {
       password: '',
       failedVerify: false,
       loggingIn: window.location.hash === '#Sign-In',
-      tryAgain: false
+      tryAgain: false,
+      error: '',
+      props: this.props
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleSignIn = this.handleSignIn.bind(this);
+    // this.changePage = this.changePage.bind(this);
     // this.handleBadVerify = this.handleBadVerify.bind(this);
   }
+
+  // componentDidMount() {
+  //   addEventListener.change()
+  // }
+
+  componentDidUpdate() {
+    if (window.location.hash !== `#${this.props.path}`) {
+      this.setState({ loggingIn: (window.location.hash === '#Sign-In'), error: '' });
+    }
+  }
+
+  // changePage() {
+  //   console.log('changePage function was run');
+  // }
 
   handleChange() {
     const { id, value } = event.target;
@@ -38,7 +55,7 @@ export default class SignOn extends React.Component {
       .then(result => {
         if (result.error) {
           // alert('UserName or Password is incorrect');
-          this.setState({ password: '', failedVerify: true, tryAgain: true });
+          this.setState({ password: '', failedVerify: true, tryAgain: true, error: result.error });
           setTimeout(() => {
             this.setState({ failedVerify: false });
           }, 500);
@@ -69,7 +86,7 @@ export default class SignOn extends React.Component {
         .then(result => {
           console.log('result:', result);
           if (result.error) {
-            this.setState({ password: '', failedVerify: true, tryAgain: true });
+            this.setState({ password: '', failedVerify: true, tryAgain: true, error: result.error });
             setTimeout(() => {
               this.setState({ failedVerify: false });
             }, 500);
@@ -92,7 +109,8 @@ export default class SignOn extends React.Component {
     const failed = this.state.failedVerify === true;
     const shake = failed ? 'shake' : '';
     const path = window.location.hash;
-    const errorMessage = this.state.loggingIn ? '⚠ Invalid credentials' : 'Username may be taken';
+    const errorMessage = this.state.error ? this.state.error : '';
+    // const errorMessage = this.state.loggingIn ? '⚠ Invalid credentials' : 'Username may be taken';
     return (
       <div className="full-width height-min-nav center-all">
         <div className="border flex align-center column">

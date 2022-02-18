@@ -58,7 +58,7 @@ export default class App extends React.Component {
       if (path === 'Landing-Page' || path === '') {
         return <Landing />;
       } else if (path === 'Sign-Up' || path === 'Sign-In') {
-        return <SignOn signInHandler={this.handleSignIn} />;
+        return <SignOn signInHandler={this.handleSignIn} path={path} />;
       } else {
         window.location.hash = '';
         return <Landing />;
